@@ -1,3 +1,8 @@
 - Separate database reads from writes. If you don't have a lot of RAM and you do reads and writes you get paging involved which can hang your system for seconds. 
 - Try and make a read only database if you can.
 - Denormalize data. If you have to fetch stuff from 20 different tables try and make one table that is just used for reading.
+
+
+high scalibility websites: 
+1. http://horicky.blogspot.com/2008/02/scalable-system-design.html
+2. http://horicky.blogspot.com/2010/10/scalable-system-design-patterns.html
