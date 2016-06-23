@@ -1,0 +1,11 @@
+1. three types of shared mem :
+slru for clog 
+wal buffer for xlog
+shared buffer pool 
+
+the way  postgres do the crash recovery, it will save three inform into pg_ctrl file. 
+1. db status
+2. checkpoint (when to do a check point is decided by engine), this will ensure all the data is persistent(write to disk) after this point. 
+3. the previous checkpoint in case #2 has issue 
+4. each transcation will generate multiple xlog, when commit happens, it will flush the xlog for this transaction to disk to ensure xlog is
+persistent.
