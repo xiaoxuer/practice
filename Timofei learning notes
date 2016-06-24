@@ -1,4 +1,4 @@
-1.  SLRU : goes to fileover 
+1.  SLRU : goes to fileover  , simple  LRU cache 
 2.  Fileover
     ========
     overlay
