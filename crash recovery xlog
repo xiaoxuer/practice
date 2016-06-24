@@ -27,6 +27,11 @@ a. re-construct the end of log inside WALBUFFE
 b. skip replay
 c. assign XID in shared memory region
 
+==  clog == 
+https://wiki.postgresql.org/wiki/Hint_Bits
+the optimization needs to happen , is to update continougues clog page, instead of do 5 times on the same page . 
+split into different page, and do it five times 
+
 XLogInsert
 --> copyXlogtoWAL (WAL BUFFER)
 --> GetXLogBuffer (position)
