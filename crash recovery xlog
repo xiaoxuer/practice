@@ -26,3 +26,7 @@ will not be overriden.
 a. re-construct the end of log inside WALBUFFE
 b. skip replay
 c. assign XID in shared memory region
+
+XLogInsert
+--> copyXlogtoWAL (WAL BUFFER)
+--> GetXLogBuffer (position)
