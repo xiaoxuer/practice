@@ -1,0 +1,16 @@
+1.  SLRU : goes to fileover 
+2.  Fileover
+    ========
+    overlay
+    ========
+    Grover 
+    
+  Fileover: this is layer that is simulate the file system , be able to read a file using file name, offset, etc 
+  Overlay: this layer will be able to go to grover and combine different version of the pages, so there is no need to write a lot of
+  code to do it. 
+  WAL Buffer: used for replay so it will be applied properly for recovery reason
+  MultiXact : used to log transaction/subtransacdtions logs to WAL buffer,  write to XLOGWAL2Grover
+  
+3. This is the USE_GROVER for grover specific changes 
+
+4. buffer cache : when loading file for program to use, it will need to go through the buffer cache
