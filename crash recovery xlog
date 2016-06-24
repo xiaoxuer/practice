@@ -15,10 +15,14 @@ transaction is going through or not  00-> in process, 01 -> commit.. ).
 note : xlog & clog shows it is committed, it cannot garuntee the data is persistent. 
 7. MVCC: used to ensure reader & writer is not blockin each other, so even if the commit is not durable, reader can still get data out.
 8. WAL buffer: before xlog is flushed to grover, they are saved into WAL buffer
+
 Manfred vs postgres 
 1. instead of flush xlog , it is doing wait for lsn durable. 
 2. when crash happens, the xid may not affect the grover lsn number, since  grover is still updating XID on the page, so the way to solve 
 this is by adding a big number to sharedmem->xid, so there is a gap in allocated xid number, but it will ensure the previous xid on grover
 will not be overriden. 
 3. hotstandby : this is for replication 
-4. 
+4. when crash recovery happens, there are couple of things happened
+a. re-construct the end of log inside WALBUFFE
+b. skip replay
+c. assign XID in shared memory region
