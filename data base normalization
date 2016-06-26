@@ -21,3 +21,13 @@ There are 4 basic types of NoSQL databases:
     Document-based Store- It stores documents made up of tagged elements. {Example- CouchDB}
     Column-based Store- Each storage block contains data from only one column, {Example- HBase, Cassandra}
     Graph-based-A network database that uses edges and nodes to represent and store data. {Example- Neo4J}
+    
+====== about column-based database ======
+
+ Column Store NoSQL Database-
+
+In column-oriented NoSQL database, data is stored in cells grouped in columns of data rather than as rows of data. Columns are logically grouped into column families. Column families can contain a virtually unlimited number of columns that can be created at runtime or the definition of the schema. Read and write is done using columns rather than rows.
+
+In comparison, most relational DBMS store data in rows, the benefit of storing data in columns, is fast search/ access and data aggregation. Relational databases store a single row as a continuous disk entry. Different rows are stored in different places on disk while Columnar databases store all the cells corresponding to a column as a continuous disk entry thus makes the search/access faster.
+
+For example:   To query the titles from a bunch of a million articles will be a painstaking task while using relational databases as it will go over each location to get item titles. On the other hand, with just one disk access, title of all the items can be obtained.
