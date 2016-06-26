@@ -4,3 +4,9 @@ http://searchdatamanagement.techtarget.com/definition/denormalization
 
 2. db optimization
 http://searchoracle.techtarget.com/tip/Optimizing-database-performance-part-2-Denormalization-and-clustering
+
+3. write to disk
+
+A translation lookaside buffer (TLB) is a memory cache that stores recent translations of virtual memory to physical addresses
+for faster retrieval.
+When a virtual memory address is referenced by a program, the search starts in the CPU. First, instruction caches are checked.
