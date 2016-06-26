@@ -10,3 +10,14 @@ http://searchoracle.techtarget.com/tip/Optimizing-database-performance-part-2-De
 A translation lookaside buffer (TLB) is a memory cache that stores recent translations of virtual memory to physical addresses
 for faster retrieval.
 When a virtual memory address is referenced by a program, the search starts in the CPU. First, instruction caches are checked.
+
+4. no sql database types 
+
+Types of NoSQL databases-
+
+There are 4 basic types of NoSQL databases:
+
+    Key-Value Store – It has a Big Hash Table of keys & values {Example- Riak, Amazon S3 (Dynamo)}
+    Document-based Store- It stores documents made up of tagged elements. {Example- CouchDB}
+    Column-based Store- Each storage block contains data from only one column, {Example- HBase, Cassandra}
+    Graph-based-A network database that uses edges and nodes to represent and store data. {Example- Neo4J}
