@@ -1,2 +1,6 @@
 1. how to store likes, to speed up read performance 
 http://searchdatamanagement.techtarget.com/definition/denormalization
+
+
+2. db optimization
+http://searchoracle.techtarget.com/tip/Optimizing-database-performance-part-2-Denormalization-and-clustering
