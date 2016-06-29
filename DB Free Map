@@ -1,0 +1,9 @@
+    /*
+     By looking at the space Id allocation algorithm within innodb we can say
+     that the spaceId is allocated consequtively, so the resulting allocations
+     are sparse
+    */
+    SharedHeap::MapAllocator<SpaceId, SpaceInfo*> m_shmemSpaceMapValueAllocator;
+    typedef SharedHeap::Map<SpaceId, SpaceInfo*> SpaceMap;
+    std::atomic<SpaceMap*>          m_fastMap = {0};
+    SpaceMap                        m_slowMap;
