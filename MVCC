@@ -27,3 +27,8 @@ how postgres implemented the MVCC :
 
 when create the snapshot, we use the mvcc to determine the visibity
 no need to do the redo 
+
+== depends on the type of MVCC 
+1. hot standby
+2. the postgres https://momjian.us/main/writings/pgsql/mvcc.pdf
+page 12. key point here needs to be looked at
