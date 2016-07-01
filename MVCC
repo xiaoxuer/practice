@@ -25,6 +25,8 @@ how postgres implemented the MVCC :
 4. update rows will update the row in place , all sort
 =====
 
+1. transaction 
+
 when create the snapshot, we use the mvcc to determine the visibity
 no need to do the redo 
 
@@ -32,3 +34,9 @@ no need to do the redo
 1. hot standby
 2. the postgres https://momjian.us/main/writings/pgsql/mvcc.pdf
 page 12. key point here needs to be looked at
+
+
+== postgres 
+no need to do re-do
+clog abort shows the transatction does not complete, there is a roll back . 
+
