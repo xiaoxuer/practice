@@ -40,3 +40,6 @@ page 12. key point here needs to be looked at
 no need to do re-do
 clog abort shows the transatction does not complete, there is a roll back . 
 
+
+commit id & trasaction id , need to know the open transaction when reading the clog 
+
