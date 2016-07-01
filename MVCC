@@ -1,0 +1,25 @@
+strict
+MVCC  snapshot  per sql statement 
+set of rows
+T1 : read from the state
+recommitted 
+again, in repeatable 
+
+serializable commit , predict locking 
+keep track of the rows you have tracked, not for read replicas
+
+replay been different, on the read node, 
+
+
+
+== 1.different isolation levels when talked about MVCC
+
+implementation 
+version object attached to the table 
+
+how postgres implemented the MVCC : 
+
+1.s_min & s_max time stamps , c_min , c_max , commit id .
+2. between the single column, in the postgres to see those value
+3. creation time of the row 
+4. update rows will update the row in place , all sort
