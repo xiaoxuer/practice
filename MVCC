@@ -43,3 +43,13 @@ clog abort shows the transatction does not complete, there is a roll back .
 
 commit id & trasaction id , need to know the open transaction when reading the clog 
 
+
+==  MVCC ppt == 
+
+https://momjian.us/main/writings/pgsql/mvcc.pdf
+ 
+Also:
+ 
+https://www.postgresql.org/docs/current/static/mvcc.html
+ 
+
