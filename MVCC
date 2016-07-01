@@ -23,3 +23,7 @@ how postgres implemented the MVCC :
 2. between the single column, in the postgres to see those value
 3. creation time of the row 
 4. update rows will update the row in place , all sort
+=====
+
+when create the snapshot, we use the mvcc to determine the visibity
+no need to do the redo 
