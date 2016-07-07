@@ -1,0 +1,21 @@
+1. xid allocation & vaccume
+xid is allocated and garbage collected as a clock . 
+there is a minimum xid, next xid and a vaccume point. 
+
+clog will record all the transaction between vaccume point & next allocated xid 
+currently postgres save it in /dataDir/pg_clog 
+
+for manfred, we are going to convert 8k page to 8 1k page, and strip happened inside segement 
+each segment has 256pages , so it is 256K. 
+
+in memory clog is 
+
+1. create a seg table, which has a pointer to 2M segement and a pool of free memory used for garbage collection 
+2. need to look at importor tool 
+to convert from original  postgres clog to apg_clog and
+
+create in memory in python , and flush to /tmp and then call the python API to call the actual function in runtime to 
+import src file to destination file in grover 
+
+the offset in grover can be found using apg_clog name 
+
