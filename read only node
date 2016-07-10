@@ -1,0 +1,86 @@
+1. s_currentReadLsn  -> set to  csd master as acked  LSN
+
+2.  how the ro update the vdL  ?
+log_grover_report_replica_progress_to_master(
+
+
+how to update to master csd
+
+
+3. how the GroverNotification get the highest vdl value  ?
+
+size_t GroverNotification::getEnvelopeInfo(
+
+
+4. how it is updated
+
+// Initialize notification based on the completed read
+//
+void GroverNotification::initializeNotification(const Lsn &vdl, const Lsn &highestLsn, const ConstSharedBuffer& gbuf, size_t sizeReceived)
+
+
+5. this is when notification is updated
+int VolumeReadNotificationAsyncContext::complete(hgrover_notification *hnotification)
+
+
+notification->initializeNotification(getVdl(), getHighestLsn(), buffer, getReturnedLength());
+
+6. this is the
+===========
+
+1.get env inform, fetch data from g not
+
+which is inited through
+void GroverNotification::initializeNotification(const Lsn &vdl, const Lsn &highestLsn, const ConstSharedBuffer& gbuf, size_t sizeReceived)
+
+//this is set through complete read
+
+========
+
+2. this is where it is set
+int VolumeReadNotificationAsyncContext::complete(hgrover_notification *hnotification)
+notification->initializeNotification(getVdl(), getHighestLsn(), buffer, getReturnedLength());
+
+===
+
+3. these two values
+
+m_vdl & m_highestLsn are set through
+
+system-read-async-context.h
+
+==
+4. updated in : ‘
+void SystemReadAsyncContext::asyncSend(
+
+system-read-async-context.cpp
+
+====
+
+5. for read replication
+
+SO_PUBLIC
+int groverVolumeReadNotifications(
+
+#3 path
+
+grover_lsn_t
+log_grover_get_current_replica_lsn ()
+{
+        return ReplEventQueue::GetCurrentReadLsn ();
+}
+
+#4
+for RO,
+ReplicationMtr::Submit (
+
+is updating current commit lsn & read lsn
+
+&
+ReplEventQueue::ProcessNextGnot ()
+
+is setting the highest lsn revcd
+=======
+
+
+void GroverNotification::getLogRecord(
