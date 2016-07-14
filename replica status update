@@ -1,0 +1,29 @@
+1. three components : 
+transport_buffer, transport_server, transpert_client 
+the buffer & server are on the master side, and client is on slave side. 
+
+2. Durable lsn : on master side, it is the vdl
+on slave side, it is the LSN been applied. csd will get the data from transport buffer to buffer cache/pool. 
+and it only have the pages been read from its side in its buffer cache, if the log on client buffer is for a page that is not in
+buffer pool, it will just ignore that page. And when some one is actually reading for that page, it will at that time read from 
+grover and get the consistent version at that time. 
+
+3. min read point : how master gets this inform. 
+After reader registered with master, it will keep sending replication request (up to 3 in flight ) with its latest status inform 
+to the master, piggy-back, and master will get the min read point (durable LSN), log in master memory. 
+
+4. how the replica lag is calculated :
+Based on the VDL, when master send out a response to slave, it will take timestamp for that VDL, and slave will catch up with that 
+VDL(after log is applied to buffer pool). and then elapste_time will be between VDL catch up and the next replication request is send 
+out from slave containing that VDL as the slave durable LSN 
+
+and replica lag is the difference in this two time stamps 
+
+5. Cluster min read point
+This is used for vaccume/garbage collection. csd will update this min read point,  and storage node will do the garbage collection. 
+
+
+
+
+
+
