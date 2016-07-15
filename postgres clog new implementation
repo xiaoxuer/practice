@@ -9,3 +9,5 @@ c. new design, to strip the clog id to avoid  hostspot issue .
 For subtrascation to check transaction commit status, it will look its parent transaction id 's status to determine whether to c
 change the stage back
 
+2. for porting clog from disk to grover, need to save the content of each 0003 0004 to the grover following the stripped version
+as file over is expecting. 
