@@ -1,0 +1,31 @@
+1. change the db connecting to 
+
+(16-07-15 23:33:26) <0> [~/RDSManfredDev-clog/src/RDSManfredDev/build/scripts]  
+dev-dsk-xddong-60001 %  /usr/local/pgsql/bin/psql                                
+psql (9.5.3)
+Type "help" for help.
+
+xddong=# \c db1
+FATAL:  database "db1" does not exist
+Previous connection kept
+
+
+2. 
+
+dev-dsk-xddong-60001 %  /usr/local/pgsql/bin/psql                               
+psql (9.5.3)
+Type "help" for help.
+
+xddong=# select * from TEST;
+ id | name 
+----+------
+(0 rows)
+
+xddong=# \q
+
+3. 
+
+(16-07-15 23:29:55) <0> [~/RDSManfredPostgres/src/RDSPostgres]  
+dev-dsk-xddong-60001 % /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data start
+server starting
+
