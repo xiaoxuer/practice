@@ -1,0 +1,40 @@
+http://datachomp.com/archives/postgres-dot-app-and-shared-preload-libraries/
+
+how to printout: 
+PostgreSQL stand-alone backend 9.5.1
+backend> SELECT * FROM pg_stat_activity
+	 1: datid	(typeid = 26, len = 4, typmod = -1, byval = t)
+	 2: datname	(typeid = 19, len = 64, typmod = -1, byval = f)
+	 3: pid	(typeid = 23, len = 4, typmod = -1, byval = t)
+	 4: usesysid	(typeid = 26, len = 4, typmod = -1, byval = t)
+	 5: usename	(typeid = 19, len = 64, typmod = -1, byval = f)
+	 6: application_name	(typeid = 25, len = -1, typmod = -1, byval = f)
+	 7: client_addr	(typeid = 869, len = -1, typmod = -1, byval = f)
+	 8: client_hostname	(typeid = 25, len = -1, typmod = -1, byval = f)
+	 9: client_port	(typeid = 23, len = 4, typmod = -1, byval = t)
+	10: backend_start	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	11: xact_start	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	12: query_start	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	13: state_change	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	14: waiting	(typeid = 16, len = 1, typmod = -1, byval = t)
+	15: state	(typeid = 25, len = -1, typmod = -1, byval = f)
+	16: backend_xid	(typeid = 28, len = 4, typmod = -1, byval = t)
+	17: backend_xmin	(typeid = 28, len = 4, typmod = -1, byval = t)
+	18: query	(typeid = 25, len = -1, typmod = -1, byval = f)
+	----
+	 1: datid = "13159"	(typeid = 26, len = 4, typmod = -1, byval = t)
+	 2: datname = "postgres"	(typeid = 19, len = 64, typmod = -1, byval = f)
+	 3: pid = "11068"	(typeid = 23, len = 4, typmod = -1, byval = t)
+	 4: usesysid = "10"	(typeid = 26, len = 4, typmod = -1, byval = t)
+	 5: usename = "tbolsh"	(typeid = 19, len = 64, typmod = -1, byval = f)
+	 6: application_name = ""	(typeid = 25, len = -1, typmod = -1, byval = f)
+	10: backend_start = "2016-07-14 17:30:43.393777-07"	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	11: xact_start = "2016-07-14 17:30:49.156599-07"	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	12: query_start = "2016-07-14 17:30:49.156599-07"	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	13: state_change = "2016-07-14 17:30:49.156603-07"	(typeid = 1184, len = 8, typmod = -1, byval = t)
+	14: waiting = "f"	(typeid = 16, len = 1, typmod = -1, byval = t)
+	15: state = "active"	(typeid = 25, len = -1, typmod = -1, byval = f)
+	17: backend_xmin = "1643"	(typeid = 28, len = 4, typmod = -1, byval = t)
+	18: query = "SELECT * FROM pg_stat_activity
+"	(typeid = 25, len = -1, typmod = -1, byval = f)
+	----
