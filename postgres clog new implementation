@@ -1,0 +1,11 @@
+1. why lock is needed for previous implementation
+a. this is because parent xid & subtransaction xid stay on the same page, so if you want to make the transaction commit 
+you need to lock the page , mark all of them , and then release the page . sub-commit only happens when the sub transaction xid 
+located on a different page compare to parent xid 
+
+b. allocated a new segment of clog only happens during xid allocation, which is already protected by a lock 
+
+c. new design, to strip the clog id to avoid  hostspot issue . 
+For subtrascation to check transaction commit status, it will look its parent transaction id 's status to determine whether to c
+change the stage back
+
