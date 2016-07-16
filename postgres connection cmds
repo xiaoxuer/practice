@@ -29,3 +29,12 @@ xddong=# \q
 dev-dsk-xddong-60001 % /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data start
 server starting
 
+
+4.
+
+(16-07-15 23:32:07) <0> [/usr/local/pgsql/data]  
+dev-dsk-xddong-60001 % /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data stop
+server starting
+
+
+
