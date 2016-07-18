@@ -13,8 +13,12 @@ su - postgres
 
 
 
+start postgres server 
 
 
+ 
+  /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data start
+  /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data stop 
 
 1. change the db connecting to 
 
