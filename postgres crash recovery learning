@@ -1,3 +1,13 @@
 http://rhaas.blogspot.com/2012/03/why-is-my-database-corrupted.html
 
 http://blog.endpoint.com/2014/09/pgxlog-disk-space-problem-on-postgres.html
+
+
+1. hint bits & clog 
+
+hint bits are associated with the tuple , xmin & xmax
+
+insert will do transaction, and update clog when commit happens (not abort )
+
+but this will not flush hint bits, only when select * from table, at this time, hint bits will be updated 
+so if hint bits are set , no need to look for clog . 
