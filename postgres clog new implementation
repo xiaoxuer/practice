@@ -11,3 +11,20 @@ change the stage back
 
 2. for porting clog from disk to grover, need to save the content of each 0003 0004 to the grover following the stripped version
 as file over is expecting. 
+
+
+PostgreSQL的MVCC
+
+　　在PostgreSQL中，当一行记录被更新时，该行数据的新版本(称为tuple)将被创建并插入表中，之前版本提供一个指针指向新版本，之前版本被标记为"expired"过期，但是还保留在数据库直到垃圾收集器回收掉。
+
+为了支持多版本，每个tuple有以下附加数据记录：
+
+    xmin – 插入更新记录和创建这个tuple的事务的ID
+    xmax – 删除记录或创建这个tuple新版本或删除记录的事务。这个字段初始是null.
+
+事务状态是保存在 $Data/pg_clog的CLOG中. 这个表包含每个事务状态信息的两个字节，可能的状态有in-progress, committed, 或  aborted。 当一个事务结束后，PostgreSQL并不会将数据库记录的改变undo回滚的，\
+它只是在CLOG标记事务为aborted . 一个PostgreSQL表可能包含许多这样aborted退出事务的数据。
+
+一个称为Vacuum 清理进程会提供expired过期/aborted退出的记录版本的垃圾回收，Vacuum 清理器也会删除被垃圾回收的tuple相关的索引项。
+
+一个tuple的xmin是有效且xmax无效时，它是可见的。 “Valid有效” 意味着 “或者是 committed 或代表当前事务”. 为了避免反复操作CLOG 表, PostgreSQL 在tuple中维持状态标识，以表示tuple是否是“known committed” 或 “known aborted”.
