@@ -28,3 +28,30 @@ PostgreSQL的MVCC
 一个称为Vacuum 清理进程会提供expired过期/aborted退出的记录版本的垃圾回收，Vacuum 清理器也会删除被垃圾回收的tuple相关的索引项。
 
 一个tuple的xmin是有效且xmax无效时，它是可见的。 “Valid有效” 意味着 “或者是 committed 或代表当前事务”. 为了避免反复操作CLOG 表, PostgreSQL 在tuple中维持状态标识，以表示tuple是否是“known committed” 或 “known aborted”.
+
+
+    以前以为PostgreSQL中行的可见性判断主要是根据这行上的xmin,xmax和clog的决定的，这几天看代码才发现，行上的t_infomask也决定了行的可见性，而且t_infomask的优化级更高。
+
+t_infomask中有以下与可见性相关的标志位：
+
+#define HEAP_XMIN_COMMITTED 0x0100 /* t_xmin committed */
+
+#define HEAP_XMIN_INVALID 0x0200 /* t_xmin invalid/aborted */
+
+#define HEAP_XMAX_COMMITTED 0x0400 /* t_xmax committed */
+
+#define HEAP_XMAX_INVALID 0x0800 /* t_xmax invalid/aborted */
+
+#define HEAP_XMAX_IS_MULTI 0x1000 /* t_xmax is a MultiXactId */
+
+ 
+
+    如果t_infomask中HEAP_XMIN_COMMITTED为真，而HEAP_XMAX_INVALID为假，则说明这行是新插入的行，是可见的，这时就不需要到clog中查询xmin的事务状态和xmax的事务状态了。
+
+    而如果HEAP_XMIN_COMMITTED没有设置，并不表示这行没有提交，而是说不知道xmin是否提交了，需要到clog中去判断xmin的状态了。对于HEAP_XMAX_COMMITTED也是这个意思。
+
+    我想，PostgreSQL使用这个机制，主要是为了提高性能，因为到clog中判断行的可见性，而clog中只有8个块是cache在共享内存中的，如果判断每个行都去查找clog，效率太低了。
+
+    这个过程的大致机制如下：
+
+    第一次插入数据时，t_infomask中的HEAP_XMIN_COMMITTED和HEAP_XMAX_INVALID并没有设置，但当事务提交后，有人再读取这个数据块时，就会判断出这些行的事务已提交了，这时就会设置t_infomask中的HEAP_XMIN_COMMITTED和HEAP_XMAX_INVALID标志位。
