@@ -84,3 +84,8 @@ is setting the highest lsn revcd
 
 
 void GroverNotification::getLogRecord(
+
+
+===== postgres replica 
+
+https://yq.aliyun.com/articles/163
