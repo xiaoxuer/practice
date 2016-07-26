@@ -58,5 +58,17 @@ server starting
 dev-dsk-xddong-60001 % /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data stop
 server starting
 
+5.
+change role 
+
+psql -U + role 
+
+change db 
+>\c + db_name
+
+
+6. checkpoing 
+ensure wal log /bin files under pg_xlog folder is applied to each indivitual data folder under 
+base directory 
 
 
