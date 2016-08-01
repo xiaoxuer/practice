@@ -1,0 +1,44 @@
+
+SeqNext  : sequential scan 
+
+
+heapgettup_pagemode (scan=0x2b47d47075e8, dir=ForwardScanDirection, nkeys=0, key=0x0) at heapam.c:755
+(gdb) n
+(gdb) n
+(gdb) p linesleft
+$1 = 0
+(gdb) p scan->rs_ntuples
+$2 = 0
+(gdb) p linesindex
+No symbol "linesindex" in current context.
+(gdb) p lineindex
+
+
+
+
+                                                                                                                                                   │
+  >│438                             if (valid)                                                                                                                                   │
+   │439                                     scan->rs_vistuples[ntup++] = lineoff;                                                                                                │
+   │440                     }                                                     
+
+
+
+FileOver::Write to file apg_clog/0000 (fs=2097152) finished with error code 0 (grover/runtime/fileover.cpp:1408) @writeLocked thr{B4E442F0}
+
+
+
+
+Function "info" not defined.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x000000000054225c in TransactionIdDidCommit at transam.c:131
+3       breakpoint     keep y   0x00000000006c27c5 in SeqNext at nodeSeqscan.c:56
+        breakpoint already hit 4 times
+4       breakpoint     keep y   0x00000000006a3d3f in ExecScanFetch at execScan.c:95
+        breakpoint already hit 3 times
+5       breakpoint     keep y   0x0000000000535d27 in TransactionIdGetStatus at apg_clog.c:218
+6       breakpoint     keep y   0x00000000004e3ca1 in heapgetpage at heapam.c:351
+        breakpoint already hit 1 time
+7       breakpoint     keep y   0x00000000004e515b in heapgettup_pagemode at heapam.c:755
+8       breakpoint     keep y   0x00000000004e3f94 in heapgetpage at heapam.c:433
+        breakpoint already hit 2 times
