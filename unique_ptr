@@ -27,6 +27,10 @@ ps，上面代码可以正确的分配空间，但是空间内的值都没有初
 
 std::unique_ptr<int[]> up(new int[10]()); // this will correctly call delete[]  初始化为0
 
+
+
+http://blog.leanote.com/post/804305986@qq.com/%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84
+
 /http://www.cnblogs.com/Tour/p/4047169.html
 auto_ptr只能托管单独的指针，而不能用于堆上动态分配的数组。而unique_ptr则可以用于数组：
 复制代码
