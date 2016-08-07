@@ -27,3 +27,30 @@ ps，上面代码可以正确的分配空间，但是空间内的值都没有初
 
 std::unique_ptr<int[]> up(new int[10]()); // this will correctly call delete[]  初始化为0
 
+
+
+
+智能指针和动态数组
+
+标准库提供了一个可以管理new分配数组的unique_ptr版本，为了用一个unique_ptr管理动态数组，我们必须在对象类型后面跟一对方括号。
+
+unique_ptr<int[]>up(new int[10]);
+
+up.realese();//自动用delete[]销毁其指针。
+
+当unique_ptr指向数组时我们不能使用点和箭头运算符，而是用下标来访问数组中的元素：
+
+for(size_ti=0;i I != 10; ++i)
+
+up[i]=i;
+
+
+unique_ptr<T[]>u //u指向一个类型为T的动态分配的数组
+
+unique_ptr<T[]>u (p) //u指向内置指针p所指向的动态分配的数组。P必须能转换为类型T＊
+
+u[i] //返回位置i的元素
+
+
+
+
