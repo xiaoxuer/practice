@@ -15,3 +15,15 @@ http://ilanever.com/article/detail.do;jsessionid=6537CA81BB4B217D96B2AABD89714DC
 dynamic arrays 
 
 http://particle128.com/posts/2015/04/smart-ptr.html
+
+
+实际上，除非需要共享目标，否则unique_ptr更适合使用数组：
+
+std::unique_ptr<int[]> up(new int[10]); // this will correctly call delete[]
+
+ 
+
+ps，上面代码可以正确的分配空间，但是空间内的值都没有初始化。如果需要默认初始化为0，可以使用下面的代码：
+
+std::unique_ptr<int[]> up(new int[10]()); // this will correctly call delete[]  初始化为0
+
