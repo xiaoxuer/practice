@@ -1,0 +1,22 @@
+write  performance
+insert build index  & vaccume 
+assumption  : cache work load performance 
+
+vacumming : page in the buffer cache 
+postgres 
+
+local drive in SSD compare to network read 
+linux buffer cache will give you  read ahead , most of the operation will be out of buffer cache 
+
+grover is over the network, cocurrency vs latency
+
+vaccume : is to do table scan 
+
+item to look at : profile of what the thread is doing
+
+table scan reads : 1. larger IOs   2. 9.6 visibility map : frozen bit
+
+preloading the b-tree and building the index on top of that 
+
+
+s-trace  sn daemon  clock_get_time 
