@@ -20,3 +20,7 @@ preloading the b-tree and building the index on top of that
 
 
 s-trace  sn daemon  clock_get_time 
+
+Postgres Prefetch
+
+https://devcenter.heroku.com/articles/understanding-postgres-data-caching
