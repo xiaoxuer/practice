@@ -2,8 +2,10 @@
 2. secondary index 
 this is based on the row number, have a list of blocks that is not continousely in number 
 
-
-
 A secondary index is a data structure that contains a subset of attributes from a table,
 along with an alternate key to support Query operations.
 You can retrieve data from the index using a Query , in much the same way as you use Query with a table.
+
+3. postgres storage system 
+
+http://rachbelaid.com/introduction-to-postgres-physical-storage/
