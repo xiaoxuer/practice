@@ -1,4 +1,5 @@
-== Aurora read replica LSN update == 
+
+ read replica LSN update == 
 
 size_t
 log_read_from_grover(
