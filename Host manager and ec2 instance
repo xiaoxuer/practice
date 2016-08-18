@@ -1,1 +1,0 @@
-1. this host manager is a java process run in EC2 instance. it is the interface between control plan and data plan . 
