@@ -14,4 +14,4 @@ insert -> vacumme-> build index for perf testing .
 buffer cache missing 
 
 throttling between engine & csd 
-1. limit the queue size, and start waiting if engine used all the pages inside shared msg queue . 
+1. limit the queue size, and start waiting if engine used all the pages inside shared msg queue.
