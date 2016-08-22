@@ -7,3 +7,8 @@ RCU supports concurrency between a single updater and multiple readers
 1. RCU is better than rw lock  since there is no contension. 
 
 2. thread access the heap  for locking, processes access shared memory. 
+
+
+1 . for un-intialized page, 
+insert -> vacumme-> build index for perf testing . 
+buffer cache missing 
