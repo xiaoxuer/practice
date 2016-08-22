@@ -15,3 +15,5 @@ buffer cache missing
 
 throttling between engine & csd 
 1. limit the queue size, and start waiting if engine used all the pages inside shared msg queue.
+
+vacumme is doing adding pages to freelist, and gr extend is done in front ground by process doing insert. 
