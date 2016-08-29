@@ -4,3 +4,7 @@ http://www.cnblogs.com/pengdonglin137/p/3345911.html
 
 another way to print this varaible length string 
 http://stackoverflow.com/questions/7228873/how-can-i-add-a-new-argument-to-the-existing-variable-argument-list
+
+
+/* use va_args to extract the value */
+http://justsee.iteye.com/blog/1637173
