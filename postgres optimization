@@ -1,0 +1,9 @@
+1. per backend processes 
+2. each log record will be lsn stamped 
+3. boost activity  
+4. one backend
+5. when generating the LSN,  per Protection Group 
+6. hit a batch size of 1k. 
+7. insert, per PG. two thread flush log cache.
+8. ship through UDS , payload through shared memory
+9. 6000 PG 
