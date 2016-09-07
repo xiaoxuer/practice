@@ -11,3 +11,6 @@
 MVCC & wal write 
 http://blog.chinaunix.net/uid-20726500-id-4040024.html
 explained about data buffer & wal buffer 
+
+//this is how to do postgres check 
+http://itindex.net/detail/50712-postgresql-wal-%E6%97%A5%E5%BF%97
