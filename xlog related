@@ -1,0 +1,17 @@
+LogRecGetRmid(xlogreader), *info, !forwardRecord);
+backend/access/transam/xlogwal2grv.c:2186:		size_t			buffer_len = (size_t)(XLogRecGetTotalLen(xlogreader));
+backend/access/transam/xlogwal2grv.c:2188:		Assert(xlogreader->max_block_id == -1);
+backend/access/transam/xlogwal2grv.c:2195:		XLogForwardForGrover(xlogreader);
+backend/access/transam/xlogwal2grv.c:2209:		XLogReaderState *xlogreader,
+backend/access/transam/xlogwal2grv.c:2235:					xlrectmp = (xl_heap_update *) XLogRecGetData(xlogreader);
+backend/access/transam/xlogwal2grv.c:2279:		lsn = walProcessTable[record->xl_rmid](xlogreader, info, NULL);
+backend/access/transam/xlogwal2grv.c:2284:		elog(DEBUG1, "xlog dispatcher: Skipping WAL record for RM %s, record type : %X",
+backend/access/transam/xlogwal2grv.c:2290:	XLogReaderFree(xlogreader);
+backend/access/transam/xlogwal2grv.c:2302:	XLogReaderState			   *xlogreader;
+backend/access/transam/xlogwal2grv.c:2320:	xlogreader = XLogReaderAllocate(NULL, NULL);
+backend/access/transam/xlogwal2grv.c:2322:	if (!DecodeXLogRecord(xlogreader, record, &errormsg))
+backend/access/transam/xlogwal2grv.c:2327:	info = XLogRecGetInfo(xlogreader) & ~XLR_INFO_MASK;
+backend/access/transam/xlogwal2grv.c:2329:	elog(DEBUG1, "Preparing to dispatch WAL Record. RM_ID: %d, info: %hhX, size: %lu, max block id: %d", XLogRecGetRmid(xlogreader), info, record_size, xlogreader->max_block_id);
+backend/access/transam/xlogwal2grv.c:2332:	prepareWALRecBlockForReplicas(pBuf, xlogreader);
+backend/access/transam/xlogwal2grv.c:2336:	errBlocksWrittenToStorage = prepareBlockWriteToStorage(pBuf, xlogreader, &info);
+backend/access/transam/xlogwal2grv.c:2342:		walBatchWrite(xlogreader, pgrBlocks, pgrBlockIndex, 0);
