@@ -14,3 +14,6 @@ explained about data buffer & wal buffer
 
 //this is how to do postgres check 
 http://itindex.net/detail/50712-postgresql-wal-%E6%97%A5%E5%BF%97
+
+//how to recover from the current clog
+http://blog.csdn.net/licheng6302/article/details/7567523
