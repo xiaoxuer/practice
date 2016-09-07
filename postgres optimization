@@ -7,3 +7,7 @@
 7. insert, per PG. two thread flush log cache.
 8. ship through UDS , payload through shared memory
 9. 6000 PG 
+
+MVCC & wal write 
+http://blog.chinaunix.net/uid-20726500-id-4040024.html
+explained about data buffer & wal buffer 
