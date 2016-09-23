@@ -1,0 +1,8 @@
+1. xlog has header + block num + main data 
+and wrapper to g WaL record to send to g .
+xlog is the one that postgres understands 
+replay happens in sn/page writer side 
+
+2. vm is a visibility map: if all tuple are visible, no dirty data in vm, it will set to visible . the use cases : 
+a. vaccum happens, no need to go through the full page for vaccume
+b. Indexing: if find the <k, v> pair, and see the page that contain the content has no dirty data, can trust the indexed inform.
