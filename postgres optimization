@@ -29,6 +29,11 @@ vaccum
 
 https://www.youtube.com/watch?v=b1fcvkl0ffQ
 
+
+pin a buffer 
+https://github.com/postgres/postgres/tree/master/src/backend/storage/buffer
+
+
 MVCC 
 
 super cool presentation about WAL record generation, etc
