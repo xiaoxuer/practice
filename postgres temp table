@@ -1,0 +1,9 @@
+1. two kinds of temp table in postgres
+one is the one created using create temp table commend, data will lost after session is closed 
+or
+2. implicit temp table, this is created during the sort or query cmd is executing.if it cannot fit into memory , it will split
+and save to disk using mdextend
+
+three kind of extend
+1. buffer looked up in read common buffer 
+2. or palloc then have to find the buffer in buffer pool 
