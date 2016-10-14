@@ -1,3 +1,7 @@
 postgres buffer pool
 
 https://madusudanan.com/blog/understanding-postgres-caching-in-depth/
+
+
+//postgres physical storage 
+http://rachbelaid.com/introduction-to-postgres-physical-storage/
