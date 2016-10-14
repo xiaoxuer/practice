@@ -4,4 +4,7 @@ https://madusudanan.com/blog/understanding-postgres-caching-in-depth/
 
 
 //postgres physical storage 
-http://rachbelaid.com/introduction-to-postgres-physical-storage/
+http://rachbelaid.com/introduction-to-postgres-physical-storage
+
+very good reference for postgres
+http://www.interdb.jp/pg/pgsql09.html
