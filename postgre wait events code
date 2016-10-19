@@ -9,3 +9,6 @@ https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=53be0b1a
 
 //this is the wait event we are looking at 
 http://paquier.xyz/postgresql-2/postgres-9-6-feature-highlight-wait-events/
+
+//get supported wait events
+https://www.postgresql.org/message-id/559D4729.9080704@postgrespro.ru
