@@ -18,3 +18,7 @@ http://datachomp.com/archives/postgres-dot-app-and-shared-preload-libraries/
 
 //stats in postgresql
 https://blog.pgaddict.com/posts/the-two-kinds-of-stats-in-postgresql
+
+
+general steps for creating postgres extension
+http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/
