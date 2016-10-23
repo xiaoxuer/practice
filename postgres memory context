@@ -1,1 +1,3 @@
 https://blog.pgaddict.com/posts/introduction-to-memory-contexts
+//postgres create memory context
+https://github.com/postgres/postgres/tree/master/src/backend/utils/mmgr
