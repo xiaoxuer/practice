@@ -12,5 +12,9 @@ http://paquier.xyz/postgresql-2/postgres-9-6-feature-highlight-wait-events/
 
 //get supported wait events
 https://www.postgresql.org/message-id/559D4729.9080704@postgrespro.ru
+
 //preloading library
 http://datachomp.com/archives/postgres-dot-app-and-shared-preload-libraries/
+
+//stats in postgresql
+https://blog.pgaddict.com/posts/the-two-kinds-of-stats-in-postgresql
