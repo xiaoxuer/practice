@@ -22,3 +22,7 @@ https://blog.pgaddict.com/posts/the-two-kinds-of-stats-in-postgresql
 
 general steps for creating postgres extension
 http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/
+
+
+//this is register macro as function pointer
+https://gcc.gnu.org/onlinedocs/gcc-3.0.1/cpp_3.html
