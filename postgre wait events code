@@ -26,3 +26,12 @@ http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/
 
 //this is register macro as function pointer
 https://gcc.gnu.org/onlinedocs/gcc-3.0.1/cpp_3.html
+
+
+ensure the library file is loaded properly
+
+ #max_files_per_process = 1000          # min 25
+                                        # (change requires restart)
+-#shared_preload_libraries = ''         # (change requires restart)
++shared_preload_libraries = 'pg_wait_sampling'          # (change requires restart)
+ 
