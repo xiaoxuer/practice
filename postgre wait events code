@@ -35,3 +35,5 @@ ensure the library file is loaded properly
 -#shared_preload_libraries = ''         # (change requires restart)
 +shared_preload_libraries = 'pg_wait_sampling'          # (change requires restart)
  
+for registering the function pointer 
+https://www.eskimo.com/~scs/cclass/int/sx10a.html
