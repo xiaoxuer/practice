@@ -37,3 +37,7 @@ ensure the library file is loaded properly
  
 for registering the function pointer 
 https://www.eskimo.com/~scs/cclass/int/sx10a.html
+
+
+about using function pointer to point to a static function and how it is used 
+http://stackoverflow.com/questions/8023213/can-a-static-function-be-called-through-a-function-pointer-in-c
