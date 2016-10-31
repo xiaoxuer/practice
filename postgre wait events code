@@ -41,3 +41,30 @@ https://www.eskimo.com/~scs/cclass/int/sx10a.html
 
 about using function pointer to point to a static function and how it is used 
 http://stackoverflow.com/questions/8023213/can-a-static-function-be-called-through-a-function-pointer-in-c
+
+
+index 4052793..b2bc423 100644
+--- a/configuration/db/config/postgresql.conf
++++ b/configuration/db/config/postgresql.conf
+@@ -144,7 +144,7 @@ dynamic_shared_memory_type = posix  # the default is the first option
+ 
+ #max_files_per_process = 1000          # min 25
+                                        # (change requires restart)
+-#shared_preload_libraries = ''         # (change requires restart)
++shared_preload_libraries = 'pg_wait_sampling'          # (change requires restart)
+ 
+ # - Cost-Based Vacuum Delay -
+ 
+diff --git a/configuration/db/data/postgresql.conf b/configuration/db/data/postgresql.conf
+index 8aeeae5..9c27777 100644
+--- a/configuration/db/data/postgresql.conf
++++ b/configuration/db/data/postgresql.conf
+@@ -142,7 +142,7 @@ dynamic_shared_memory_type = posix  # the default is the first option
+ 
+ #max_files_per_process = 1000          # min 25
+                                        # (change requires restart)
+-#shared_preload_libraries = ''         # (change requires restart)
++shared_preload_libraries = 'pg_wait_sampling'          # (change requires restart)
+ 
+ # - Cost-Based Vacuum Delay -
+ 
