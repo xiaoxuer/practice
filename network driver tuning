@@ -1,0 +1,33 @@
+1. 1.4M is the pps, package per second 
+band width  = pps * bytes per package
+so there is 20G bandwidth limit , but pps will set a limit there
+
+2.ENA networks driver : 8 haredware queue, 0->7 is used for processing the haredware interrupts
+interrupt between network card , and handled by kernel 0-> 7 cores
+
+3. interrupts between kernel -> user space is handled by other cores 
+
+4. regarding to RPS :  by default, it is disable, which means it is not distributing the sw interrupts to other cores
+
+5. you can force it by:
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-0/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-1/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-2/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-3/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-4/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-5/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-6/rps_cpus
+echo 00000000,0000ff00 > /sys/class/net/eth1/queues/rx-7/rps_cpus
+change eth0 -> eth1 
+
+6. force other engine & other daemon to use other cores
+by a. change scheduler code
+   b. change NUMA policies 
+   
+  numa : CPU to the memory close to it 
+   
+7. client side: let all 32 cores to process network traffic by numa setting 
+rps buffer size flow count 
+
+8. for ivg intel network card, there are only two hw queues. 
+
