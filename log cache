@@ -1,0 +1,5 @@
+1. create 1M buffer 
+2. flush to disk only when: 
+a. full 
+b. time out
+c. read ahead of VDL 
