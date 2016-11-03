@@ -1,0 +1,4 @@
+1. page LSN  based on the record, getting from the end of the record
+2. last generated LSN  (passed into the function)
+3. how to write a test to trigger this path 4
+4. video aurora 
