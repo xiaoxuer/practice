@@ -1,0 +1,27 @@
+postgres=# select * from xue500;
+postgres=# 
+postgres=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner   
+--------+--------+-------+----------
+ public | xue500 | table | rdsadmin
+(1 row)
+
+postgres=# create table xue ( a int );
+CREATE TABLE
+postgres=# insert into xue ( 3 ) ;
+ERROR:  syntax error at or near "3"
+LINE 1: insert into xue ( 3 ) ;
+                          ^
+postgres=# insert into xue values ( 3 ) ;
+INSERT 0 1
+postgres=# update table set a = 4;
+ERROR:  syntax error at or near "table"
+LINE 1: update table set a = 4;
+               ^
+postgres=# update xue set a = 5;
+UPDATE 1
+postgres=# update xue set a = 6;
+UPDATE 1
+postgres=# \dt
+         List of relations
