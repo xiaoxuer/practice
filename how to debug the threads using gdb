@@ -1,0 +1,10 @@
+1.  gdb  attach to csd  process
+2.  ps -efL | egrep csdd 
+3.  pstack  and see all the csdd threads, find the one that accumulated cpu time is reasonable 
+4. 
+info threads
+
+thread  # 
+where to see the trace 
+
+use : fin  to get to a certain point in the code 
