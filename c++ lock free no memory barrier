@@ -10,3 +10,7 @@ http://blog.csdn.net/wangyuexiongqi/article/details/45723503
 
 4. c++ lock free data structure 
 http://www.ibm.com/developerworks/cn/aix/library/au-multithreaded_structures2/index.html
+
+5. 
+c++ lock free no memory barrier
+http://stackoverflow.com/questions/18278611/can-two-stdatomics-be-part-of-one-union
