@@ -1,3 +1,6 @@
 1. atomic swap 
 
 http://blog.poxiao.me/p/spinlock-implementation-in-cpp11/
+
+2. c++ lock free implementation 
+http://www.infoq.com/cn/news/2014/11/cpp-lock-free-programming
