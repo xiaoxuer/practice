@@ -18,3 +18,6 @@ http://stackoverflow.com/questions/18278611/can-two-stdatomics-be-part-of-one-un
 6. 
 c++ lock free barrier
 https://gcc.gnu.org/onlinedocs/gcc/_005f_005fatomic-Builtins.html
+
+7. this is about memory barrier
+https://gcc.gnu.org/wiki/Atomic/GCCMM/AtomicSync
