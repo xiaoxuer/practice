@@ -14,3 +14,7 @@ http://www.ibm.com/developerworks/cn/aix/library/au-multithreaded_structures2/in
 5. 
 c++ lock free no memory barrier
 http://stackoverflow.com/questions/18278611/can-two-stdatomics-be-part-of-one-union
+
+6. 
+c++ lock free barrier
+https://gcc.gnu.org/onlinedocs/gcc/_005f_005fatomic-Builtins.html
