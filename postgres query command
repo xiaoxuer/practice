@@ -1,0 +1,48 @@
+dsadmin=# \q 
+[ec2-user@ip-10-77-20-122 bin]$ 
+[ec2-user@ip-10-77-20-122 bin]$ ./psql xue_nov15
+psql (9.6.1)
+Type "help" for help.
+
+xue_nov15=# select count (*) from sbtest56;  
+ count  
+--------
+ 142464
+(1 row)
+
+xue_nov15=# select count (*) from sbtest56;  
+ count  
+--------
+ 142464
+(1 row)
+
+xue_nov15=# select count (*) from sbtest56;  
+ count  
+--------
+ 142464
+(1 row)
+
+xue_nov15=# select count (*) from sbtest55;
+ count  
+--------
+ 150528
+(1 row)
+
+xue_nov15=# select count (*) from sbtest56;
+ count  
+--------
+ 145152
+(1 row)
+
+xue_nov15=# select count (*) from sbtest56;
+ count  
+--------
+ 177408
+(1 row)
+
+xue_nov15=# select count (*) from sbtest56;
+ count  
+--------
+ 201600
+(1 row)
+
