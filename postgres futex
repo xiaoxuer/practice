@@ -1,3 +1,10 @@
 1. use the futex 
 
-http://www.linuxidc.com/Linux/2011-02/32229.htm
+http://www.linuxidc.com/Linux/2011-02/32229.html
+
+2. futex & context switch 
+http://www.cnblogs.com/zhiranok/archive/2012/08/13/context_switch_1.html
+
+3. futex & other stuffs
+
+http://www.360doc.com/content/10/0709/16/4910_37892166.shtml
