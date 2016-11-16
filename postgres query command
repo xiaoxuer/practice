@@ -1,3 +1,6 @@
+sql cmd
+http://www.w3schools.com/sql/sql_func_count.asp
+
 dsadmin=# \q 
 [ec2-user@ip-10-77-20-122 bin]$ 
 [ec2-user@ip-10-77-20-122 bin]$ ./psql xue_nov15
