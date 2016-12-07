@@ -1,0 +1,4 @@
+http://stackoverflow.com/questions/38623976/how-to-debug-a-futex-contention-shown-in-strace/38648135
+
+how to detect the contension: 
+https://www.sourceware.org/systemtap/SystemTap_Beginners_Guide/futexcontentionsect.html
