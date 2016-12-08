@@ -1,0 +1,16 @@
+  647  vi xue.sh 
+  648  chmod 777 xue.sh 
+  649  ./xue.sh 
+  650  debuginfo-install rhel-x86_64-201609
+  651  stap
+  652  uname -r
+  653  stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'.
+  654  stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  655  sudo stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  656  sudo yum install kernel-devel-4.4.23-31.54.amzn1.x86_64 
+  657  sudo stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  658   debuginfo-install kernel-4.4.23-31.54.amzn1.x86_64
+  659  sudo  debuginfo-install kernel-4.4.23-31.54.amzn1.x86_64
+  660  stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  661  sudo stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
+  662  history 
