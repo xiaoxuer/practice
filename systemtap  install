@@ -48,7 +48,6 @@ probe end {
             process_names[pid], pid, lock, @count(lock_waits[pid,lock]),
             @avg(lock_waits[pid,lock]))
 }
-~          
 
 //install system tap 
 
