@@ -2,3 +2,6 @@ http://stackoverflow.com/questions/38623976/how-to-debug-a-futex-contention-show
 
 how to detect the contension: 
 https://www.sourceware.org/systemtap/SystemTap_Beginners_Guide/futexcontentionsect.html
+
+//install systemtap to locate the futex 
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/SystemTap_Beginners_Guide/using-systemtap.html#using-setup
