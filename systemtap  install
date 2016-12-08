@@ -48,4 +48,8 @@ probe end {
             process_names[pid], pid, lock, @count(lock_waits[pid,lock]),
             @avg(lock_waits[pid,lock]))
 }
-~                                                                   
+~          
+
+//install system tap 
+
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/SystemTap_Beginners_Guide/using-systemtap.html#installproper
