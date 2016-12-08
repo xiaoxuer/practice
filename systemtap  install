@@ -14,3 +14,8 @@
   660  stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
   661  sudo stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'
   662  history 
+  
+  
+  sample systemtap script
+
+https://sourceware.org/systemtap/examples/keyword-index.html
