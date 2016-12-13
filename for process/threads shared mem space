@@ -1,0 +1,43 @@
+how to access global parameters in a process 
+	
+
+I think you are getting confused with the difference between a process and a thread.
+
+A process can contain multiple threads. A process has its own address space and system variables (such as file handles). Processes can only interact through IPC mechanisms, and cannot directly touch another processes variables otherwise. Every process has a PID that the OS uses to identify it (at least in linux). Processes can have many threads running on top of the process.
+
+A thread is a unique construct that can run inside a process. Each thread has its own unique stack pointer (which points to the assembly executing) and unique registry values. When the OS switches between threads, it switches the current line of execution and restores all the resgistry values stored with that thread. However, threads in a process share all the same memory, which is why you can modify global and class variables between threads and they are affected.
+
+If anyone wants to chime in they can. This is just a brief summary of what I think are some of the important points between understanding the difference between processes and threads.
+
+
+fork won't produce the result that you expect, for the reasons mentioned by the others. Even if it did spawn a new thread you're not incrementing the variable in a threads-safe manner. If you want to spawn threads and increment a variable in each one you can use pthreads and a mutex like so:
+
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
+
+int t = 0;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void* threadFunc(void* param) {
+    pthread_mutex_lock(&mutex);
+    printf("%d\n", t++);
+    pthread_mutex_unlock(&mutex);
+}
+
+int main(void){
+    int i;
+    pthread_t threads[5];
+    for (i = 0; i < 5; i++){
+        pthread_create(&threads[i], NULL, threadFunc, NULL);
+    }
+
+    for (i = 0; i < 5; i++){
+        pthread_join(threads[i], NULL);
+    }
+
+    pthrad_mutex_destroy(&mutex);
+    return 0;
+}
+
+All threads share the address space of the parent process (where t is located), so they will all increment the same t.
