@@ -7,3 +7,6 @@ http://blog.csdn.net/u013600225/article/details/50688525
 official explaination 
 
 http://www.boost.org/doc/libs/1_42_0/doc/html/boost_asio/reference/io_service/stop.html
+
+how to do the proper asio run ? 
+http://blog.jqian.net/post/boost-asio.html
