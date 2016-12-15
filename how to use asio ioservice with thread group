@@ -10,3 +10,7 @@ http://www.boost.org/doc/libs/1_42_0/doc/html/boost_asio/reference/io_service/st
 
 how to do the proper asio run ? 
 http://blog.jqian.net/post/boost-asio.html
+
+//how to do the inter process communication
+
+http://zh.highscore.de/cpp/boost/interprocesscommunication.html
