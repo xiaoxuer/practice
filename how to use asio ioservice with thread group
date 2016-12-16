@@ -17,3 +17,6 @@ http://zh.highscore.de/cpp/boost/interprocesscommunication.html
 
 //io service, this has the inform about what is needed for clean shut down runtime process 
 http://www.boost.org/doc/libs/1_57_0/doc/html/boost_asio/reference/io_service.html
+
+//this is for shared pointers and why we need to use it
+http://blog.csdn.net/great3779/article/details/7302403
