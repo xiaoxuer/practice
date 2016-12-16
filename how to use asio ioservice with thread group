@@ -15,5 +15,5 @@ http://blog.jqian.net/post/boost-asio.html
 
 http://zh.highscore.de/cpp/boost/interprocesscommunication.html
 
-//io service
+//io service, this has the inform about what is needed for clean shut down runtime process 
 http://www.boost.org/doc/libs/1_57_0/doc/html/boost_asio/reference/io_service.html
