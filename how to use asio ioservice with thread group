@@ -14,3 +14,6 @@ http://blog.jqian.net/post/boost-asio.html
 //how to do the inter process communication
 
 http://zh.highscore.de/cpp/boost/interprocesscommunication.html
+
+//io service
+http://www.boost.org/doc/libs/1_57_0/doc/html/boost_asio/reference/io_service.html
