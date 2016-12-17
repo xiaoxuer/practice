@@ -1,3 +1,6 @@
 https://blog.pgaddict.com/posts/introduction-to-memory-contexts
 //postgres create memory context
 https://github.com/postgres/postgres/tree/master/src/backend/utils/mmgr
+//about deleting mem context
+http://blog.csdn.net/beiigang/article/details/7093975
+
