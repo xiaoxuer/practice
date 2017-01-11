@@ -1,0 +1,10 @@
+http://blog.csdn.net/kaiwii/article/details/7719011
+this is pthread kill & cancel for a check point 
+http://blog.csdn.net/huangshanchun/article/details/47420961
+thread interruption 
+
+18.8 Thread Interruption
+A thread that is in the WaitSleepJoin state can be interrupted by another thread which results in the former thread transitioning into the Running state. To interrupt a thread we call the thread member function interrupt() and then an exception of type thread_interrupted is thrown. We note that interrupt() only works when the thread is in the WaitSleepJoin state. If the thread never enters this state, you should call boost::this_thread::interruption_point() to specify a point where the thread can be interrupted.
+The following function contains a defined interruption point:
+
+is this only for letting the other thread to run ? 
