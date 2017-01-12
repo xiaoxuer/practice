@@ -8,3 +8,7 @@ A thread that is in the WaitSleepJoin state can be interrupted by another thread
 The following function contains a defined interruption point:
 
 is this only for letting the other thread to run ? 
+
+very good explaination about how to set the proper pthread cancel steps 
+
+http://www.cnblogs.com/lijunamneg/archive/2013/01/25/2877211.html
