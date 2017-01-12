@@ -12,3 +12,7 @@ is this only for letting the other thread to run ?
 very good explaination about how to set the proper pthread cancel steps 
 
 http://www.cnblogs.com/lijunamneg/archive/2013/01/25/2877211.html
+
+learned a lot from this post : 
+http://www.cnblogs.com/mydomain/archive/2011/08/15/2139830.html
+
