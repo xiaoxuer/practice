@@ -1,0 +1,29 @@
+1. how to use pthread_cancel & pthread_kill for this
+
+    /* this is the working code for read block thread
+    boost::thread *tmp_thread = m_readBlockThread->m_thread;
+    pthread_kill(tmp_thread->native_handle(), SIGALRM);
+    */
+    //this will kill the main process
+    //pthread_kill(tmp_thread->native_handle(), 9);
+/*this is pthread_cancel version
+#ifdef 0
+
+    boost::thread *tmp_thread = m_readBlockThread->m_thread;
+    
+    pthread_cancel(tmp_thread->native_handle());
+    pthread_join(tmp_thread->native_handle(), NULL);
+
+    boost::thread *tmp_thread1 = m_verifyWritesThread->m_thread;
+    
+
+    pthread_cancel(tmp_thread1->native_handle());
+    pthread_join(tmp_thread1->native_handle(), NULL);
+
+
+#endif
+*/
+
+    /* interrupt point */
+    //boost::thread *tmp_thread = m_readBlockThread->m_thread.load();
+    //boost::thread *tmp_thread1 = m_verifyWritesThread->m_thread.load();
