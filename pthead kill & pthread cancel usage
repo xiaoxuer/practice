@@ -1,0 +1,56 @@
+ 1. thread to be interrupted 
+ 
+   /* xue  good code for send signal to read verify thread 
+    struct sigaction actions;
+    memset(&actions, 0, sizeof(actions));
+    sigemptyset(&actions.sa_mask);
+    actions.sa_flags = 0;
+    actions.sa_handler = sighand;
+    sigaction(SIGALRM, &actions, NULL);
+    
+    GLOG(INFO, "Verify block writes - ReadBlockThread started");
+    assert(WriteVerificationQueue::instance != NULL);
+
+    signal(SIGALRM,sighand);
+    */
+    /* xue good for cancel case
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE,NULL);
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL);
+    */
+
+    //interrupt enable 
+    // Loop until server shutdow
+    
+    
+  2. main thread that may kill those threads
+  
+  
+  /* this is the working code for read block thread
+    boost::thread *tmp_thread = m_readBlockThread->m_thread;
+    pthread_kill(tmp_thread->native_handle(), SIGALRM);
+    */
+    //this will kill the main process
+    //pthread_kill(tmp_thread->native_handle(), 9);
+/*this is pthread_cancel version
+#ifdef 0
+
+    boost::thread *tmp_thread = m_readBlockThread->m_thread;
+    
+    pthread_cancel(tmp_thread->native_handle());
+    pthread_join(tmp_thread->native_handle(), NULL);
+
+    boost::thread *tmp_thread1 = m_verifyWritesThread->m_thread;
+    
+
+    pthread_cancel(tmp_thread1->native_handle());
+    pthread_join(tmp_thread1->native_handle(), NULL);
+
+
+#endif
+*/
+
+    /* interrupt point */
+    //boost::thread *tmp_thread = m_readBlockThread->m_thread.load();
+    //boost::thread *tmp_thread1 = m_verifyWritesThread->m_thread.load();
+    
+    //
