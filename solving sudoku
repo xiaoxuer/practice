@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool is_valid(vector<vector<char>>& board, int r, int c, int val) {
+        for(int i = 0; i < 9; i++) {
+            if(board[r][i] == val + '0') return false;
+            else if(board[i][c] == val + '0') return false;
+
+        }
+        int r_start = r / 3 * 3;
+        int c_start = c / 3 * 3;
+        for(int i = 0; i < 3; i++) {
+             for(int j = 0; j < 3; j++) {
+                 if(board[r_start + i][c_start + j] == val + '0')
+                    return false;
+             }
+        }
+        return true;
+    }
+
+    bool helper(vector<vector<char>>& board, int idx) { 
+        int row = idx / 9;
+        int col = idx % 9;
+        if(row == 9) return true;
+        if(board[row][col] != '.')
+            return helper(board, idx + 1);
+        else {
+            for(int i = 1; i <= 9; i++) {
+                if(is_valid(board, row, col, i)) {
+                    board[row][col] = i + '0';
+                    if(helper(board, idx + 1)) return true;
+                    board[row][col] = '.';
+                }
+            }
+        }
+        return false;
+    }
+    void solveSudoku(vector<vector<char>>& board) {
+        int idx = 0 * 9 + 0;
+        helper(board, idx);
+    }
+    
+};
