@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_map<int, bool> hash_map_row;
+        unordered_map<int, bool> hash_map_col;
+        for(int i = 0; i < 9; i++) {
+            hash_map_row.clear();
+            hash_map_col.clear();
+            for(int j = 0; j < 9; j++) {
+                if(board[i][j] == '.') continue;
+                if(hash_map_row.find(board[i][j] - '0') != hash_map_row.end()) return false;
+                hash_map_row[board[i][j] - '0'] = 1;
+            }
+            for(int j = 0; j < 9; j++) {
+                 if(board[j][i]  == '.') continue;
+                 if(hash_map_col.find(board[j][i] - '0') != hash_map_col.end()) return false;
+                 hash_map_col[board[j][i] - '0'] = 1;
+            }
+            
+        }
+        for(int i = 0; i < 3; i++) { 
+            for(int j = 0; j < 3; j++) {
+                hash_map_row.clear();
+                for(int m = 0; m < 3; m++) {
+                    for(int n = 0; n < 3; n++) {
+                        if(board[i * 3 + m][j * 3 + n] == '.') continue;
+                        if(hash_map_row.find(board[i * 3 + m][j * 3 + n] - '0') != hash_map_row.end()) return false;
+                        hash_map_row[board[i * 3 + m][j * 3 + n] - '0'] = 1;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
