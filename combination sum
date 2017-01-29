@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void helper(vector<vector<int>>& res, vector<int>& sol, vector<int>& candidates, int target, int s_idx) {
+        if(target == 0) {
+            res.push_back(sol);
+            return;
+        } else if(target < 0) return;
+        int len = candidates.size();
+        for(int i = s_idx; i < len; i++) {
+            if(target < candidates[i]) return;
+            sol.push_back(candidates[i]);
+            helper(res, sol, candidates, target - candidates[i], i);
+            sol.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        int size = candidates.size();
+        vector<int> sol;
+        sort(candidates.begin(), candidates.end());
+        helper(res, sol, candidates, target, 0);
+        return res;
+    }
+};
