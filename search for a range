@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void helper(vector<int>& nums, int target, vector<int>& res, int s, int e) {
+        if(s > e) return;
+        while(s <= e) {
+            int mid = s + (e - s) / 2;
+            if(nums[mid] == target) {
+                res[0] = res[0] == -1 ? mid : min(res[0], mid);
+                res[1] = res[1] == -1 ? mid : max(res[1], mid);
+                helper(nums, target, res, s, mid -1);
+                helper(nums, target, res, mid + 1, e);
+                break;
+            } else if(nums[mid] > target) {
+                e = mid - 1;
+            } else {
+                s = mid + 1;
+            }
+        }
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int size = nums.size();
+        vector<int> res(2, -1);
+        helper(nums, target, res, 0, size - 1);
+        return res;
+    }
+};
