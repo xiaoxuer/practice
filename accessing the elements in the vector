@@ -1,0 +1,10 @@
+Typically, iterators are used to access elements of a container in linear fashion; however, with "random access iterators", it is possible to access any element in the same fashion as operator[].
+
+To access arbitrary elements in a vector vec, you can use the following:
+
+vec.begin()                  // 1st
+vec.begin()+1                // 2nd
+// ...
+vec.begin()+(i-1)            // ith
+// ...
+vec.begin()+(vec.size()-1)   // last
