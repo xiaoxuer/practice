@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+            char lookup[26];
+            memset(lookup, 0, sizeof(char) * 26);
+            int used[26];
+            memset(used, 0, sizeof(int) * 26);
+            
+            int s_len = s.length();
+            int t_len = t.length();
+            if(s_len != t_len)
+                return false;
+                
+            for(int i = 0; i < s_len; i++) {
+                //check: 1. whether see this char before
+                //check: 2. if seen before , whether maps to the same char ? 
+                if(lookup[s[i] - 'a'] != 0 && lookup[s[i] -'a'] != t[i])
+                    return false;
+                if(lookup[s[i] - 'a'] == 0 && used[t[i] - 'a']) 
+                    return false;
+                used[t[i] - 'a'] = 1;
+                lookup[s[i] - 'a'] = t[i];
+            }
+            return true;
+            
+    }
+};
