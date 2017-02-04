@@ -1,0 +1,47 @@
+
+class Solution {
+public:
+    void helper(vector<vector<int>>& res, vector<int>& sol, int idx, vector<int>& nums) {
+            int size = nums.size();
+            res.push_back(sol);
+            if(idx >= size) return;
+            
+            for(int i = idx; i < size; i++) {
+                if( i == idx || nums[i] != nums[i-1]) {
+                    sol.push_back(nums[i]);
+                    helper(res, sol, i + 1, nums);
+                    sol.pop_back();
+                }
+            }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> sol;
+        sort(nums.begin(), nums.end());
+        helper(res, sol, 0, nums);
+        return res;
+        
+    }
+};
+
+/*
+class Solution {
+public:
+    std::vector<std::vector<int> > subsetsWithDup(std::vector<int> &nums) {
+        std::sort(nums.begin(), nums.end());
+        std::vector<std::vector<int> > res;
+        std::vector<int> vec;
+        subsetsWithDup(res, nums, vec, 0);
+        return res;
+    }
+private:
+    void subsetsWithDup(std::vector<std::vector<int> > &res, std::vector<int> &nums, std::vector<int> &vec, int begin) {
+        res.push_back(vec);
+        for (int i = begin; i != nums.size(); ++i)
+            if (i == begin || nums[i] != nums[i - 1]) { 
+                vec.push_back(nums[i]);
+                subsetsWithDup(res, nums, vec, i + 1);
+                vec.pop_back();
+            }
+    }
+};
