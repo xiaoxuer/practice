@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool valid_string(string s, int s_idx, int e_idx) {
+        int val = atoi(s.substr(s_idx, 2).c_str());
+        if(val >= 11 && val <= 26) return true;
+        else return false;
+    }
+    
+    int numDecodings(string s) {
+        int len = s.length();
+        int prev_1 = 1; //empty string
+        int prev_2 = 1; //one letter string
+        int res = 0;
+        if(len == 0) return 0;
+        else if(len == 1) {
+            if(s[0] < '1' || s[0] > '9')
+                return 0;
+            else
+                return prev_2;
+        }
+        for(int i = 1; i < len; i++) {
+            res = 0;
+            
+            res += prev_2;
+            if(s[i] < '0' || s[i] > '9') return 0;
+            else if(s[i] == '0' && (s[i-1] >= '3' || s[i-1] <= '0')) return 0;
+            
+            if(valid_string(s, i-1, i)) res += prev_1;
+            prev_1 = prev_2;
+            prev_2 = res;
+        }
+        return res;
+    }
+};
