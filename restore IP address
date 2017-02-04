@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<string> restoreIpAddresses(string s) {
+        vector<string> col;
+        string ip;
+        partition_ip(s, 0, 0, ip, col);
+        return col;
+    }
+    
+    void partition_ip(string s, int startIndex, int partNum,
+            string resultIp, vector<string>& col) {
+                 //max: 3 bits per partition 
+                 if(s.size() - startIndex > (4 - partNum) * 3)
+                    return;
+                 if(s.size() - startIndex < (4 - partNum))
+                    return;
+                 if(startIndex == s.size() && partNum == 4)
+                 {
+                     resultIp.resize(resultIp.size() - 1);
+                     col.push_back(resultIp);
+                     return;
+                 }
+                 int num = 0;
+                 for(int i = startIndex; i < startIndex + 3; i++) {
+                     num = num * 10 + (s[i] - '0');
+                     if(num <= 255) {
+                         resultIp += s[i];
+                         partition_ip(s, i+1, partNum + 1, resultIp + '.', col);
+                     }
+                     
+                    //only allow one  '0' case and go to next level 
+                     if(num == 0)
+                       break;
+                 }
+            }
+    
+};
