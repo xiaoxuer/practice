@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void generate_subset(vector<int>& nums, vector<vector<int>>& res, vector<int>& sol, vector<bool>& used, int idx) {
+        for(; idx < nums.size(); idx++) {
+            if(idx > 0 && nums[idx] == nums[idx - 1] && used[idx - 1] == 0) continue;
+            used[idx] = 1;
+            sol.push_back(nums[idx]);
+            res.push_back(sol);
+            generate_subset(nums, res, sol, used, idx + 1);
+            sol.pop_back();
+            used[idx] = 0;
+        }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        int size = nums.size();
+        vector<int> sol;
+        vector<bool> used(size, 0);
+        res.push_back(sol);
+        generate_subset(nums, res, sol, used, 0);
+        return res;
+    }
+};
