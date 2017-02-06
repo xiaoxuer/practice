@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int row = triangle.size();
+        if(row == 0)    return 0;
+        int col = triangle[row - 1].size();
+        
+        vector<int> dp_1(row, 0);
+        vector<int> dp_2(row, 0);
+
+        for(int i = 0; i < row; i++)
+            dp_1[i] = triangle[row-1][i];
+        
+        int cnt = 0;
+        for(int j = row - 2; j >= 0; j--) {
+             for(int k = 0; k <= j; k++) {
+                 if(cnt % 2 == 0)
+                    dp_2[k] = min(dp_1[k], dp_1[k+1]) + triangle[j][k];
+                  else
+                    dp_1[k] = min(dp_2[k], dp_2[k+1]) + triangle[j][k];
+              }
+              cnt++;
+        }
+        if(cnt % 2)
+           return  dp_2[0];
+        else return dp_1[0];
+
+    }
+};
