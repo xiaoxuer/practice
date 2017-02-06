@@ -1,0 +1,22 @@
+class Solution {
+public://rotation array
+    vector<int> getRow(int rowIndex) {
+        vector<int> temp;
+        rowIndex++;
+        if(rowIndex <= 0)
+            return temp;
+        temp.push_back(1);
+        vector<int> next;
+        int i = 2;
+        for(; i <= rowIndex; i++) {
+            next.resize(temp.size() + 1);
+            next[next.size() - 1] = 1;
+            for(int j = temp.size() - 1; j > 0; j--)
+                next[j] = temp[j] + temp[j-1];
+            next[0] = 1;
+            temp = next;
+        }
+        return temp;
+    
+    }
+};
