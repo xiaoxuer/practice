@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool helper(string s, int s_idx, int e_idx, unordered_set<string>& wordDict, vector<int>& dp) {
+        if(s_idx > e_idx) return false;
+        if(dp[s_idx] == 0) return false;
+        else if(dp[s_idx] == 1) return true;
+        for(int i = 1; i <= e_idx - s_idx + 1; i++) {
+            if(wordDict.find(s.substr(s_idx, i)) != wordDict.end()) {
+                 if(helper(s, s_idx + i, e_idx, wordDict, dp)) {
+                      dp[s_idx] = 1;
+                      return true;
+                 }
+            }
+        }
+        dp[s_idx] = 0;
+        return false;
+    }
+    
+    bool wordBreak(string s, unordered_set<string>& wordDict) {
+        int len = s.length();
+        vector<int> dp(len, -1);
+        helper(s, 0, len - 1, wordDict, dp);
+        return dp[0] == 1 ? true : false;
+    }
+};
