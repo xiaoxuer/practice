@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int size = prices.size();
+        int start = 0; 
+        int end = size -1;
+        if(size <= 1) return 0;
+        int buy_val = prices[start];
+        int sell_val = prices[end];
+        while(start <= end) {
+            buy_val = min(buy_val, prices[start++]);
+            sell_val = max(sell_val, prices[end--]);
+        }
+        return (sell_val - buy_val)  > 0 ? (sell_val - buy_val) : 0;
+    }
+};
