@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> sol;
+        sol.push_back(1);
+        if(rowIndex == 0) return sol;
+        sol.push_back(1);
+        if(rowIndex == 1) return sol;
+        for(int i = 2; i <= rowIndex; i++) {
+            sol.resize(sol.size() + 1);
+            sol[sol.size() - 1] = 1;
+            for(int i = sol.size() - 2; i > 0; i--)
+                sol[i] = sol[i] + sol[i-1];
+            
+        }
+        return sol;
+    }
+};
