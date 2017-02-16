@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool helper(string s, int s_idx, int e_idx, vector<string>& wordDict) { 
+        if(s_idx > e_idx) return;
+        for(int i = 1; i <= e_idx - s_idx + 1; i++) {
+            string sub = s.substr(s_idx, i);
+            if(wordDict.count(sub) != 1) 
+        }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        bool res;
+        int len = s.length();
+        return helper(s, 0, len - 1, wordDict);
+    }
+};
