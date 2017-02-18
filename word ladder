@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
+        //BFS
+        queue<pair<string, int>> bfs_que;
+        bfs_que.push(make_pair(beginWord, 1));
+        while(!bfs_que.empty()) {
+            auto itr = bfs_que.front();
+            bfs_que.pop();
+            string str = itr.first;
+            //check here when pop out from the queue
+            if(str == endWord) {
+                return itr.second;
+            }
+            int len = str.length();
+            for(int i = 0; i < len; i++) {
+                char tmp = str[i];
+                for(int j = 0; j < 26; j++) {
+                    if(tmp - 'a' == j) continue;
+                    str[i] = 'a' + j;
+                    if(wordList.find(str) != wordList.end()) {
+                        bfs_que.push(make_pair(str, itr.second + 1));
+                        wordList.erase(str);
+                    }
+                }
+                str[i] = tmp;
+            }
+        }
+        return 0;
+    }
+};
