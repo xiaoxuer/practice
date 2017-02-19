@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool is_valid(string s, int start_idx, int len) {
+            if(start_idx >= s.length())
+                return false;
+            if(len  == 0) //len + 1
+                return true;
+            int start = start_idx;
+            int end =  start_idx + len;
+            while(start < end) {
+                    if(s[start++] != s[end--])
+                        return false;
+            }
+            return true;
+    }
+    void partition_helper(vector<vector<string>> &res, vector<string>& sol,  int size, int start, string s) {
+        if(start == size) { 
+            res.push_back(sol);
+            return;
+        }
+        
+        for(int len = 0 ; len < (size - start); len++) {
+            if(is_valid(s, start, len)) {
+                sol.push_back(s.substr(start, len + 1));
+                partition_helper(res, sol, size, start + len + 1, s);
+                sol.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> res;
+        int size = s.length();
+        vector<string> sol;
+        partition_helper(res, sol, size, 0,  s);
+        return res;
+        
+    }
+};
