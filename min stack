@@ -1,0 +1,36 @@
+class MinStack {
+private: 
+    stack<int> min_stack;
+    int min;
+    stack<int> num;
+public:
+//keep a min stack 
+    void push(int x) {
+        num.push(x);
+
+        if(min_stack.empty())
+            min_stack.push(x);
+    
+        if(x <= min_stack.top())
+            min_stack.push(x);
+        else
+            min_stack.push(min_stack.top());
+    }
+
+    void pop() {
+        if(num.empty())
+            return;
+        int res = num.top();
+        num.pop();
+        min_stack.pop();
+    }
+
+    int top() {
+        if(!num.empty())
+        return num.top();
+    }
+
+    int getMin() {
+        return min_stack.top();
+    }
+};
