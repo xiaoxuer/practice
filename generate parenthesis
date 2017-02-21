@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void helper(vector<string>& res, string str, int left, int right) {
+        if(left == 0 && right == 0) {
+            res.push_back(str);
+            return;
+        }
+        else if(left > right) return; //error condition 
+        else  {
+            if(left > 0) {
+                str += "(";
+                helper(res, str, left - 1, right);
+                str.resize(str.length() - 1);
+            } 
+            if(left < right) {
+                str += ")";
+                helper(res, str, left, right - 1);
+                str.resize(str.length() - 1);
+            }
+        }
+        return;
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        if(n == 0) return res;
+        string str;
+        helper(res, str, n, n);
+        return res;
+    }
+};
