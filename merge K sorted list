@@ -1,0 +1,46 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class my_compare { 
+public: 
+    bool operator()(ListNode* t1, ListNode* t2) {
+        return t1->val > t2->val;
+    }
+};
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<ListNode*, vector<ListNode*>, my_compare> k_elem_heap;
+        //init the heap 
+        ///you do not need to track which list in list vector the popped elem is coming from 
+        ///to go to the next elem, just do top->next
+        int size = lists.size();
+        ListNode* new_head = new ListNode(-1);
+        if(size == 0)
+            return NULL;
+            
+        for(int i = 0; i < size; i++) {
+            if(lists[i] != NULL)
+                k_elem_heap.push(lists[i]);
+        }
+        if(k_elem_heap.size() == 0)
+            return NULL;
+        ListNode* cur = k_elem_heap.top();
+        ListNode* tail = new_head;
+        while(!k_elem_heap.empty()) {
+            k_elem_heap.pop();
+            if(cur->next)
+                k_elem_heap.push(cur->next);
+            tail->next = cur;
+            tail = cur;
+            cur = k_elem_heap.top();
+        }
+        return new_head->next;
+    }
+};
