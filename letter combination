@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void helper(vector<string>& res, string digits, int len, int start, string str) {
+        string trans[] = {"", " ", "abc", "def", "ghi", "jkl",  
+        "mno", "pqrs", "tuv", "wxyz"};
+        if(start == len) {
+            res.push_back(str);
+            return;
+        }
+        string comb = trans[digits[start] - '0'];
+        int size = comb.length();
+
+        for(int i = 0; i < size; i++)
+        {
+            //this is a back tracking steps
+            // + operator in string  appending is really good , note !!! 
+                str += comb[i];
+                helper(res, digits, len, start + 1, str);
+                str.resize(str.length() - 1);
+        }
+    }
+
+    vector<string> letterCombinations(string digits) {
+            vector<string> res;
+
+            int length = digits.length();
+            if(length == 0)
+                return res;
+            string str;
+            
+            helper(res, digits, length, 0, str);
+            return res;
+        
+    }
+};
