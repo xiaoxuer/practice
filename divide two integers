@@ -1,0 +1,52 @@
+http://bangbingsyb.blogspot.com/2014/11/divide-two-integers-divide-two-integers.html
+how recursion happened 
+http://bangbingsyb.blogspot.com/2014/11/divide-two-integers-divide-two-integers.html
+
+class Solution {
+public:
+        /* solution 1 time limit exceeds */
+        /*
+            int cnt = 0;
+            int res = 0;
+            if(divisor == 0)
+                return INT_MAX;
+            if(divisor == 1)
+                return dividend;
+            int sign = (dividend * divisor) < 0 ? -1 : 1;
+            int dividend_abs = abs(dividend);
+            int divisor_abs = abs(divisor);
+            while(res < dividend_abs) {
+                res += divisor_abs;
+                cnt++;
+            }
+            return cnt;
+        */
+        //use bit shift
+    int divide(int dividend, int divisor) {
+        return (int)divideL((dividend), (divisor));   
+    }
+    
+    long long divideL(long long dividend, long long divisor) {
+            if(dividend < 0 && divisor < 0) return divideL(-dividend, -divisor);
+            if(divisor < 0 &&  dividend > 0) return -divideL(dividend, -divisor);
+            if(dividend < 0 && divisor > 0) return -divideL(-dividend, divisor);
+            if(divisor == 1) return dividend;
+            if(divisor > dividend) return 0;
+            long long d = divisor;
+            long long bitcnt = 1;
+            long long ans = 0;
+            while(d < dividend) {
+                    d <<= 1;
+                    bitcnt <<= 1;
+            }
+            while(d >= divisor) {
+                if(dividend >=d) {
+                    dividend -= d;
+                    ans += bitcnt;
+                }
+                d >>= 1;
+                bitcnt >>= 1;
+            }
+            return ans;
+    }
+};
