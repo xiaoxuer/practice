@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int size = nums.size();
+        int dp[size];
+        int res = INT_MIN;
+        if(size == 0)
+            return 0;
+        
+        memset(dp, 0, sizeof(int) * size);
+        dp[0] = nums[0];
+        res = dp[0];
+        for(int i = 1; i < size; i++)
+        {
+             dp[i] = max(dp[i-1] + nums[i], nums[i]);
+             if(dp[i] > res)
+                res = dp[i];
+        }
+        return res;
+    }
+};
