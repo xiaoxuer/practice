@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void update(vector<char> &res, int val, int idx) {
+        int cur = res[idx] - '0';
+        cur += val;
+        int carry = cur / 10;
+        res[idx] = cur % 10 + '0';
+        if(carry > 0)
+            update(res, carry, idx + 1);
+    }
+    string multiply(string num1, string num2) {
+        int len_1 = num1.length();
+        int len_2 = num2.length();
+        if(len_1 < len_2)
+            return multiply(num2, num1);
+        int len_res = len_1 + len_2;
+        vector<char> res(len_1 + len_2, '0');
+
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+        for(int i = 0; i < len_2; i++) {
+            for(int j = 0; j < len_1; j++) {
+                int val = (num2[i] - '0') * (num1[j] - '0');
+                update(res, val, i+j);
+            }
+        }
+        if(res[len_1 + len_2 - 1] == '0')
+            res.resize(len_1 + len_2 - 1);
+        reverse(res.begin(), res.end());
+        
+        string str;
+        for(int i = 0; i < res.size(); i++)
+            str += res[i];
+        return str;
+    }
+};
