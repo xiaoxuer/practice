@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void helper(vector<vector<int>>& res, vector<int>& nums, vector<int>& used, vector<int>& sol, int start) {
+        //base case 
+        if(start == nums.size()) {
+            res.push_back(sol);
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++) {
+             if(used[i] != 1) {
+                sol[start] = nums[i];
+                used[i] = 1;
+                helper(res, nums, used, sol, start + 1);
+                used[i] = 0;
+             }
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        
+        int size = nums.size();
+        vector<int> used(size, 0);
+        vector<vector<int>> res;
+        vector<int> sol(size, 0);
+        
+        if(size == 0)
+            return res;
+        
+        helper(res, nums, used, sol, 0);
+        
+        return res;
+    }
+};
