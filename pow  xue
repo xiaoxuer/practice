@@ -1,0 +1,23 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+    //divide and conqure 
+        bool neg = 0;
+        if(n == 0)
+            return 1;
+            
+        if(n == 1)
+            return x;
+            
+        if(n < 0)
+            neg = 1;
+        n = abs(n);
+   
+        double val = myPow(x, n/2);
+        if(n % 2) //odd
+            return neg ? 1/(val * val * x) : (val * val *x);
+            
+        else //even 
+            return neg ? 1/(val * val) : (val * val);
+    }
+};
