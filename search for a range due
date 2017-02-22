@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void helper(vector<int>& res, vector<int>& nums, int target, int start, int end) {
+            if(start  > end)
+                return;
+            int mid = start + (end - start) / 2;
+            if(nums[mid] < target) {
+                 helper(res, nums,  target, mid + 1, end);
+            } else if (nums[mid] > target) {
+                 helper(res, nums,  target,  start, mid - 1);
+            } else { 
+                 res[0] = min(res[0], mid);
+                 res[1] = max(res[1], mid);
+                 helper(res, nums, target, start, mid - 1);
+                 helper(res, nums, target, mid + 1, end);
+            }
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int size = nums.size();
+        int start = 0; 
+        int end = size - 1;
+        int left, right;
+        vector<int> res;
+        if(size == 0)
+            return res;
+        res.push_back(INT_MAX);
+        res.push_back(INT_MIN);
+        helper(res, nums, target, start, end);
+        if(res[0] == INT_MAX) {
+             res[0] = -1;
+             res[1] = -1;
+        }
+        return res;
+            
+    }
+};
