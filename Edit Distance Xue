@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int wlen_1 = word1.length();
+        int wlen_2 = word2.length();
+        vector<vector<int>> dp(wlen_1 + 1, vector<int>(wlen_2 + 1));
+        //init
+        int edit = 0;
+        dp[0][0] = 0;
+        for(int i = 1; i <= wlen_1; i++) {
+            dp[i][0] = i;
+        }
+        for(int i = 1; i <= wlen_2; i++) {
+             dp[0][i] = i;
+        }
+        ///dp[i][j] stands for string 1 : 0->i-1, string2: 0->j-1 cases
+        for(int i = 1; i <= wlen_1; i++) {
+            for(int j = 1; j <= wlen_2; j++) {
+                
+                edit = min(dp[i-1][j], dp[i][j-1]) + 1;
+                if(word1[i-1] == word2[j-1]) {
+                    edit = min(edit, dp[i-1][j-1]);
+                } else {
+                    edit = min(edit, dp[i-1][j-1] + 1);
+                }
+                dp[i][j] = edit;
+            }
+        }
+        return dp[wlen_1][wlen_2];
+    }
+};
