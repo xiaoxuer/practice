@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool valid_num(string s, int idx) {
+        if(idx < 2) return false;
+        string sub = s.substr(idx - 2, 2);
+        int val = atoi(sub.c_str());
+        if(val <= 26 && val >= 10) return true;
+        else return false;
+    }
+
+    int numDecodings(string s) {
+        int len = s.length();
+        if(len == 0) return  0;
+        int dp[len + 1];
+        memset(dp, 0, (len + 1) * sizeof(int));
+        dp[0] = 1;
+        if(s[0] > '0' && s[0] <= '9')
+            dp[1] = 1;
+        for(int i = 2; i <= len; i++) {
+            if(valid_num(s, i)) {
+                 dp[i] = dp[i-2];
+            }
+            if(s[i] > '0' && s[i] <= '9')
+                dp[i] += dp[i-1];
+        }
+        return dp[len];
+    }
+};
