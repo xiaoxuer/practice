@@ -1,0 +1,6 @@
+this is for the return value and rules to follow when we do BST 
+
+总结：这里有必要总结下binary search的一个规律
+当x不存在于一个sorted array A[0:n-1]中时，binary search的循环必然会因为start > end而终止。此时必然有：A[end] < x < A[start]，如果end >=0 且 start<n。
+
+这也就是为什么这题需要返回end，而Insertion Position那题却要返回start的原因。
