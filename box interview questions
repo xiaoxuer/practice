@@ -1,0 +1,174 @@
+Design caching system on whiteboard.
+http://stackoverflow.com/questions/575685/looking-for-simple-java-in-memory-cache
+http://blog.gainlo.co/index.php/2016/05/17/design-a-cache-system/
+
+Design inmemorydb with code.
+
+http://softwareengineering.stackexchange.com/questions/311415/designing-an-in-memory-table-in-c
+
+
+Elevator: 
+2. 电梯设计题，50层楼4部电梯，主要考虑怎样优化让人等的时间最短，写一些代码实现，只有一个小时时间，写不了很多code就结束了，这一轮是两个人面。
+http://massivetechinterview.blogspot.com/2015/07/thought-works-object-oriented-design.html
+
+
+File System Design: 
+http://massivetechinterview.blogspot.com/2014/07/design-in-memory-file-system-runhe-tian.html
+
+
+4. multithreading，用户都对某个文件夹内的文件进行操作，怎样保证不出错。c++ thread safe queue , multi thread file access 
+http://codereview.stackexchange.com/questions/62126/general-multithreaded-file-processing
+
+
+====
+Interview Questions
+
+The first question was about how to merge k arrays together
+ 
+class Solution {
+public:
+    struct compNode {
+        bool operator()(ListNode *p, ListNode *q) const {
+            return p->val>q->val;
+        }  
+    };
+
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        priority_queue<ListNode*, vector<ListNode*>, compNode> pq;
+        ListNode *dummy = new ListNode(0), *tail = dummy;
+        
+        for(int i=0; i<lists.size(); i++) 
+            if(lists[i]) pq.push(lists[i]);
+            
+        while(!pq.empty()) {
+            tail->next = pq.top();
+            tail = tail->next;
+            pq.pop();
+            if(tail->next) pq.push(tail->next);
+        }
+        
+        return dummy->next;
+    }
+};
+
+
+Interview Questions
+
+Write a function that gets a integer and returns true if the integer is prime  
+bool isPrime(int number){
+    if (number != 2){
+        if (number < 2 || number % 2 == 0) {
+            return false;
+        }
+        for(int i=3; (i*i)<=number; i+=2){
+            if(number % i == 0 ){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+=====
+
+interview Questions
+
+Identify where potential race conditions can happen in this hardware & database configuration:
+
+1) validate that folder Z already exists in cache or in the db
+2) invalidate cache data for Z
+3) INSERT file 'c' into folder Z
+4) gather folder Z + children
+5) update cache with new information about folder Z
+
+hardware set-up would be as follows:
+
+                         --- cache machine 1
+                      // --------------------------- \\
+outside world -- --- cache machine 2 --- database
+                      \\ --------------------------- //
+                         --- cache…………………………...
+If you speak with a dramatically senior engineer (i.e. old-school Comp Sci, not to mention much more senior than anyone else you'll ever see at Box,) this is the question he's likely to shoot at you:
+
+
+========
+Interview Questions
+
+ Design file system in SQL;  
+
+==========
+Interview Questions
+
+Memcache. 
+
+http://posulliv.github.io/2009/09/19/using-memcached-with-c/
+========
+
+Inner Join vs Outer Join in MySQL  
+
+Assuming you're joining on columns with no duplicates, which is a very common case:
+
+An inner join of A and B gives the result of A intersect B, i.e. the inner part of a Venn diagram intersection.
+An outer join of A and B gives the results of A union B, i.e. the outer parts of a Venn diagram union.
+Examples
+
+Suppose you have two tables, with a single column each, and data as follows:
+
+A    B
+-    -
+1    3
+2    4
+3    5
+4    6
+Note that (1,2) are unique to A, (3,4) are common, and (5,6) are unique to B.
+
+Inner join
+
+An inner join using either of the equivalent queries gives the intersection of the two tables, i.e. the two rows they have in common.
+
+select * from a INNER JOIN b on a.a = b.b;
+select a.*,b.*  from a,b where a.a = b.b;
+
+a | b
+--+--
+3 | 3
+4 | 4
+Left outer join
+
+A left outer join will give all rows in A, plus any common rows in B.
+
+select * from a LEFT OUTER JOIN b on a.a = b.b;
+select a.*,b.*  from a,b where a.a = b.b(+);
+
+a |  b
+--+-----
+1 | null
+2 | null
+3 |    3
+4 |    4
+Right outer join
+
+A right outer join will give all rows in B, plus any common rows in A.
+
+select * from a RIGHT OUTER JOIN b on a.a = b.b;
+select a.*,b.*  from a,b where a.a(+) = b.b;
+
+a    |  b
+-----+----
+3    |  3
+4    |  4
+null |  5
+null |  6
+Full outer join
+
+A full outer join will give you the union of A and B, i.e. all the rows in A and all the rows in B. If something in A doesn't have a corresponding datum in B, then the B portion is null, and vice versa.
+
+select * from a FULL OUTER JOIN b on a.a = b.b;
+
+ a   |  b
+-----+-----
+   1 | null
+   2 | null
+   3 |    3
+   4 |    4
+null |    6
+null |    5
