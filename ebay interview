@@ -1,0 +1,18 @@
+
+攒人品为了下周FB onsite. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+
+第一轮：同胞（女）
+1, find the first and last occurrence of an element in a sorted array (
+binary search, leetcode)
+2, 四小孩过桥问题。
+
+第二轮：烙印+南亚女（组长）
+1， _ _ + _ _ = _ _ _   把0-6填到空格中，讲思路。
+2，find all duplicates and their occurrence in an array( use HashMap, .鏈枃鍘熷垱鑷�1point3acres璁哄潧
+remember to filter out the single elements)
+
+第三轮： Sr.Manager
+1，四小孩过桥（没错，同一题，不过改数据了，厚着脸说没做过）
+2，测试一个产品，throw the product from 1st to 100th floor, the product will
+break from a certain floor and above. design a strategy to find out that 
+floor. (Binary Search 变种)
