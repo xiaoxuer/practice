@@ -1,0 +1,29 @@
+class Solution {
+public:
+        void helper(set<vector<int>>& res, vector<int>& candidates, int target, vector<int>& sol, int start) { 
+            if(target < 0)
+                return;
+            if(target == 0) {
+                res.insert(sol);
+                return;
+            }
+            for(int i = start; i  < candidates.size(); i++) {
+                if(candidates[i] <= target) {
+                     sol.push_back(candidates[i]);
+                     helper(res, candidates, target - candidates[i], sol, i + 1);
+                     sol.pop_back();
+                }
+            }
+    }
+    
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        set<vector<int>> temp;
+        vector<int> sol;
+        sort(candidates.begin(), candidates.end());
+        helper(temp, candidates, target , sol, 0);
+        for(auto it : temp)
+            res.push_back(it);
+        return res;
+    }
+};
