@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void helper(vector<int>& nums, vector<int> &sol, vector<vector<int>>& res, int s_idx, int size) {
+        if(s_idx == size) {
+            res.push_back(sol);
+            return;
+        }
+        for(int i = s_idx; i < size; i++) {
+            sol.push_back(nums[i]);
+            helper(nums, sol, res, i, s)
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        int size = nums.size();
+        vector<int> sol;
+        helper(nums, sol, res, 0, size);
+        return res;
+    }
+};
