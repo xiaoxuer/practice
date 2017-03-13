@@ -1,0 +1,363 @@
+subset 
+http://bangbingsyb.blogspot.com/2014/11/leetcode-subsets-i-ii.html
+
+word ladder
+第一题：word ladder （leetcode原题）， 要求返回最短路径从一个string转移到另一个string，每次只允许改变其中一个字符，而且改变过后的词必须在dictionary之内。
+首先要求最短路径，肯定要上BFS方法，其次要注意两个queue之间的关系和expansion的条件。leetcode对时间要求很严格，所以当时我记得accept的时候我是把凡是查过的词统统从字典里删掉了。但面试的时候只要写出整体思路就会给过的。
+
+
+
+3 . boggle game，给定一个string，再给定一个二维的字符数组，每次只允许在二维数组中上下左右移动，禁止访问曾经访问过的字符，问该string是否可以在这个二维字符数组中被发现，返回true or false。
+
+比如
+dict是
+a b c d
+e f g h
+i j k l-google 1point3acres
+m n o p
+那么string：“abf”，返回true
+string：”efi“，返回false
+
+这只是一个简单的DFS,用一个StringBuffer记录当前节点，然后expand再循环进
+
+4
+
+第三题：节点通信（属于Distributed System问题）。给定N个节点，节点通过某种safe的总线相连接，每个节点都拥有两个函数:
+一个是void send(int id, int value): 意思是把一个value传送给那个编号为id的节点；
+一个int receive(int id)：意思是从编号为id的节点接收其传输的value并返回这个value。
+
+现在的任务是，N个节点，每一个节点拥有自己的int id，和int value，现在要求每个节点都run相同的一个函数，在所有节点完成run之后，每一个节点都知道了所有N个节点value的总和。
+
+乍看挺难的，但仔细想来至少说最naive的方案是可以想到的，就是说，每个node给所有id不等于自己id的节点发送自己的value，同时，接收所有id不等于自己id的节点的value，讲这个收到的值和自己本身的value累加，那么就可以返回最后结果了。思路是正确的，但是这个是O(N^2)的复杂度。
+. 1point3acres.com/bbs
+面试官接着问，是否可以优化。
+必然是可以的，因为其实每个节点没有必要去都做累加的，只要一个当做master的节点做累加然后将累加值send所有节点就可以了。我这么说，然后code也写了，这个复杂度是O(N).
+
+我本来觉得已经结束了，然后没想到他说了great之后，又说，是不是还可以更快一点？这下我是的确有点confused了，但细细想想，能比O(N)好那就只有O(log(N))了呀，而log(N)肯定只能通过某种binary的方法才能实现的，所以思路就是这样，将所有节点组成binary tree，比如从0到N-1的节点：
+0
+1 2
+3 4 5 6
+7 8 9 10.........
+那么这样，每个节点的parent的id就是：(id-1)/2，而每个节点也拥有left和right两个children他们的id是2id + 1, 2id +2.如此一来，只要所有节点都计算自己的value和两个children发来的value之和，那么0节点将以log（N)的速度收到全部节点的value之和，核心代码是：
+sum = value + receive(2id+1) + receive(2id+2);
+send((id-1)/2,sum);
+但是要注意边界条件的控制，比如最后一个层的点只要发送自己value就可以了，而0节点不需要再往上层发任何数据了。. From 1point 3acres bbs
+
+那么接下来的任务就是，从0节点开始把计算出的全部节点value和发送给自己的children，如此所有Node都会被通知到。
+
+
+
+5
+
+ZigZag Traversal Binary Tree，这个也是leetcode原题，用两个Stack解决，
+
+6
+
+第二题给一个整数数组，判断数组是否能被拆分成两个子数组，子数组的和相等。
+
+Ksum
+
+
+
+7 
+
+接着让实现一个BST的iterator，每次返回下一个最小元素
+
+
+
+8 
+
+hash table collision
+
+9 
+
+Find the kth largest number in a set of numbers
+k select 
+
+10 
+给个数字打印excel表格纵栏名字， 比如 1 － A， 26 － Z， 52 － AZ 等等。第二题是返回字符串里最长无重复字符串长度。
+
+11
+题目是很简单的Word break变形...用DP做的给他解释半天...早知道用DFS做了= =
+
+12
+DBMS Questions
+1) ACID properties Explain with an example
+2) Mongodb, NoSQL and SQL discussions for long time.
+
+13
+Trie how to implement
+
+14
+implement hash table 
+
+15 
+Write a Program to find the Mirror of a Tree – Proper code required (Try to Give variable name According to the Meaning )
+
+16
+ Write a Program to find the Largest Binary Search tree in a Binary tree
+
+17
+What is normalization ? Explain all types .
+
+18 
+convert URL to tiny URL 
+
+19
+mult-threading classes in java  
+
+
+20 
+db  questions
+
+21
+Design Schema  
+
+22
+1. Write program to identify if two subnets collide.  Answer Question
+2. Write program to convert a BST to heap (such as the largest number is root, the second largest is to the left of root, the third largest to right of root and so on)  
+
+23
+
+Interview Questions
+
+Find LCA in binary tree.  
+
+
+24  c++ 
+How to do the inheritance  Answer Question
+find the palindromes in a string
+
+25
+Interview Questions
+
+1st round:
+1. How to uniquely identify the repeating strings from the array.
+2. How to search in Skiplist
+2nd round:
+1. BinarySearch
+2. How to write Customized Comparator
+3. Anagrams
+3rd round:
+Lunch with tech manager and find maximum sub array
+4th round:
+1. Binary Search in sorted matrix
+2. Different ways of writing Singleton pattern
+3. Resume go through
+5th round:
+1. How HashMap works
+2. Get sum using minimum combination of numbers provided
+6th round:
+1. Singleton
+2. Tree traversal
+3. How to mirror the tree
+4. Stack implementation
+5. Queue using stack  6. Reverse the sentence  
+
+26 
+
+
+Interview Questions
+
+Given a sentence, Hello how are you HELLO. Find the minimum distance between two words. Given input: hello, you. Output: 1. The input words are case insensitive.  1 Answer
+Was given a parent div and 3 child divs inside. Asked to add CSS to each giving some height and width to the child divs and border of a certain thickness to all. Asked to add another child div inside the second child. Was asked to give absolute position to this div with some bottom and left positioning and asked to draw the layout.  1 Answer
+Was given a function q(func) which accepts another function as input. Each time this function is called, it will execute the pass in function after 3 seconds. So, if it is called 3 times,
+q(func);
+q(func);
+q(func);
+the func passed inside will only get called after 3 seconds and the second one will get called only after the first one completes and so on.  
+
+27 
+Interview Questions
+
+- Number of ways to walk the matrix from (0,0) to (m,n). (with and without obstacles)
+- Given a binary tree, link nodes at the same level  1 Answer
+- Design a service. Things to consider given service constraints, SLA and so on.
+- Some behavior questions.  Answer Question
+Current project and past projects on resume. Asked for in-depth implementation.  Answer Question
+
+28   c++ conceptual question 
+
+29
+Interview Questions
+
+1. Find the least common ancestor (LCA) in a binary tree. Pointer from node to parent is NOT present. Design the tree node and write the method that returns the LCA
+2. Given a circularly rotated array [3 5 6 7 8 -3 -1 -1 1 2] design an algorithm to find an element in an efficient way.  
+
+30 
+
+Mostly basic tree questions. Some tricky questions that require to think about the pattern, almost like brain teasing questions. Last rounds contain mostly design questions regarding your previous job design or a fictional one.  
+
+
+31
+Interview Questions
+
+Implement a linkedList  
+
+32
+Interview Questions
+Delete a node in a BST  
+
+33
+Interview Questions
+
+Basic sorting algorithm  
+
+
+34
+Interview Questions
+
+Algorithmic questions like max contiguous sum,permutations of string, connected graph.  
+35
+Write a SQL queries using Group by and having.
+
+
+36 
+Interview Questions
+
+1) What is the data structure of a search engine
+2) 2 Sum 
+
+37 
+Interview Questions
+
+Multithreading was core of all interview questions by most of interviewer.  
+
+38 
+Interview Questions
+
+I was asked to determine if two rectangles overlap. Question was actually easy but I wasn't in right frame of mind and couldn't solve it in given time. Discuss Java collections.  
+
+39
+
+Interview Questions
+
+Longest Common Subsequence, DFS and print paths from the root node to all the nodes in the tree etc.  
+
+40
+
+rotate an integer array in length of k 
+
+41
+Interview Questions
+
+How to implement ranking function in SQL  
+42
+
+Given two binary trees check if one is subtree of other.
+Verify if given series is a Fibonacci series or not.
+Reverse a doubly linked list.
+Given a BST with integer values and a key, find the closest node to the key. eg. for BST 1 4 7 15 and key 8 node 7 is to be returned.
+Some design based questions.  
+
+43 
+Write a program in Java to assess a given string whether it complies with following patterns. Return true if a given string complies with these patterns else false.
+
+N = N1 + N2
+N&gt;= N1 &gt;= N2
+where N is the Nth element in the string or element at Nth position;
+N1 is the (N-1) element in the string & N2 is the (N-2) element in the string.
+
+Example 1: 224610
+Elements in this string are… 
+
+
+44
+
+Interview Questions
+
+the first interview was about basic question on OOP concepts like ( polymorphism , inheritance and encapsulation) and one programming ques - anagrams.
+the questions in the second intr was from my resume and 2 programming questions - Given a string print the oldest repeating character and newest none repeating character - Given a string of open and close brackets return whether the number of open and close brackets match or…
+
+45 
+Interview Questions
+
+Design a cache system  
+
+46
+On Site: Given a huge file, find duplicate strings and return how many times it appeared. Given a table of employee and salary, find the highest salary in each department.  Answer Question
+On site:Given an array of numbers, find the pair of two numbers whose sum is less than six. Design a RDBMS for a stock market. 5.  Answer Question
+Given an array of size 100 with sequential numbers, there is only one number is duplicate. Find that number.
+Return the 2nd highest salary from salary table  
+47 
+Interview Questions
+
+find a string in a large doc  
+48 
+
+Phone Interview 1:
+(1)Find maximum height of BST. This is easy using recursion. Then he asked me to do it iteratively, which I somehow managed to solve.
+(2)The Dutch flag problem. This was not tough. But the next question was tough. It was about finding particular keys in a dictionary. They have a custom function that tells you if a key is in the dictionary and you to find out if for given input, you get required output. For example --
+
+The dictionary is like:
+
+{hi,hello,sir,how, are, you}
+
+And you have a function isWord(x) that tells you if a particular word is in that dictinary.
+
+So if the input is hisirhowareyou
+the output must be hi sir how are you
+
+
+49 
+Interview Questions
+
+1. Fibonacci numbers
+1 1 2 3 5 8 13 ...
+
+2. two sum, do not need to deal with duplicate pairs  
+
+50
+Interview Questions
+
+longest substring palindrome  
+
+51
+
+Interview Questions
+
+given a chess board that is 3 x 3 squares, and only one piece, the knight, write a program that will move the knight from any starting location to any other (given) location in the board and return an error if it can not.  
+
+52
+Interview Questions
+
+1. Implement a function that would accept two strings and check if one string is an anagram of the other.
+2. Given an array(list) of integers, write a function that would determine if the elements in the array can be divided into two parts each giving the same sum.
+3. Email address drop-down application. For example, when we type email address while composing an email, we get a drop down of suggested… 
+
+53
+
+Given int **p how do you find the value of what it is pointing to? What is p in this case?  Answer Question
+what is the difference between C and C++? How do you declare an array of 5 characters?  Answer Question
+What is a Hash Table and what are its complexities? What is a balanced tree?  Answer Question
+What do you to to an insertion sort to get a runtime of O(1)? When inserting an element to a sorted linked list, what would its runtime be?  Answer Question
+What is polymorphism? Give an example. What is the difference between private inheritance and protected inheritance?  
+
+54
+
+The technical questions covered a wide range of areas which I appreciated. The areas included object oriented design, architecture design, problem-solving/algorithms, objective-c (blocks, view controllers, etc.), and mobile specific questions. The most difficult question I was asked was to design a document upload/fetcher system for mobile (kinda like dropbox for the iphone). The difficulty was really in all the details of the problem (caching, database modeling, security, sessions, etc). Algorithm questions ranged from binary tree search questions to array pattern searching. The most unexpected question was the interviewer gave me a stream of digits and asked me to find the pattern. I got really stumped on this problem, it was my last interview of the day and I just blanked out. I guess I did well enough throughout the day because I got the job. By no means an easy interview, but not extremely hard, I was extremely well prepared as I had been interviewing for a while. Id say its on the average to difficult scale, if you are bad at architecting systems then this interview would have been HIGH diff.  
+
+55 
+
+Interview Questions
+
+How would we make Singleton thread protected except interviewer did not want to include Synchronized block in there.  
+
+56 
+Interview Questions
+
+Fibonacci Series using recursion and iteration. Ask to reduce number of recursive calls.
+
+57 
+Interview Questions
+
+In linux, how to search a string in a Gigabytes file and print that string in the terminal.  
+58
+
+Interview Questions
+
+what data structure to use in case of a load balancer  
+
+59 
+
+https://www.careercup.com/question?id=5763811128639488
