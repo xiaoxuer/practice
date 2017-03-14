@@ -1,0 +1,4 @@
+1. Behavior: Primary Key is used to identify a row (record) in a table whereas Unique-key is to prevent 
+duplicate values in a column (with the exception of a null entry). 
+2. Indexing: By default Sql-engine creates Clustered Index on primary-key if not exists and Non-Clustered 
+Index on Unique-key.
