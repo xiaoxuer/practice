@@ -1,0 +1,1052 @@
+subset 
+http://bangbingsyb.blogspot.com/2014/11/leetcode-subsets-i-ii.html
+
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        vector<vector<int>> allSets;
+        sort(S.begin(), S.end());
+        unsigned long long maxNum = pow(2, S.size()) - 1;
+        for(unsigned long long i=0; i<=maxNum; i++) 
+            allSets.push_back(num2subset(S, i));
+        return allSets;
+    }
+    
+    vector<int> num2subset(vector<int> &S, unsigned long long num) {
+        vector<int> sol;
+        int i=0;
+        while(num) {
+            if(num & 1) sol.push_back(S[i]);
+            num >>= 1;
+            i++;
+        }
+        return sol;
+    }
+
+subset II 
+remove duplicates. how to : for each level, do a for loop to find the element to be appended to the current  position , and mark in an array this element has been used 
+
+
+word ladder
+第一题：word ladder （leetcode原题）， 要求返回最短路径从一个string转移到另一个string，每次只允许改变其中一个字符，而且改变过后的词必须在dictionary之内。
+首先要求最短路径，肯定要上BFS方法，其次要注意两个queue之间的关系和expansion的条件。leetcode对时间要求很严格，所以当时我记得accept的时候我是把凡是查过的词统统从字典里删掉了。但面试的时候只要写出整体思路就会给过的。
+
+DFS to find the path
+
+3 . boggle game，给定一个string，再给定一个二维的字符数组，每次只允许在二维数组中上下左右移动，禁止访问曾经访问过的字符，问该string是否可以在这个二维字符数组中被发现，返回true or false。
+
+比如
+dict是
+a b c d
+e f g h
+i j k l-google 1point3acres
+m n o p
+那么string：“abf”，返回true
+string：”efi“，返回false
+
+这只是一个简单的DFS,用一个StringBuffer记录当前节点，然后expand再循环进
+
+
+
+4
+
+第三题：节点通信（属于Distributed System问题）。给定N个节点，节点通过某种safe的总线相连接，每个节点都拥有两个函数:
+一个是void send(int id, int value): 意思是把一个value传送给那个编号为id的节点；
+一个int receive(int id)：意思是从编号为id的节点接收其传输的value并返回这个value。
+
+现在的任务是，N个节点，每一个节点拥有自己的int id，和int value，现在要求每个节点都run相同的一个函数，在所有节点完成run之后，每一个节点都知道了所有N个节点value的总和。
+
+乍看挺难的，但仔细想来至少说最naive的方案是可以想到的，就是说，每个node给所有id不等于自己id的节点发送自己的value，同时，接收所有id不等于自己id的节点的value，讲这个收到的值和自己本身的value累加，那么就可以返回最后结果了。思路是正确的，但是这个是O(N^2)的复杂度。
+. 1point3acres.com/bbs
+面试官接着问，是否可以优化。
+必然是可以的，因为其实每个节点没有必要去都做累加的，只要一个当做master的节点做累加然后将累加值send所有节点就可以了。我这么说，然后code也写了，这个复杂度是O(N).
+
+我本来觉得已经结束了，然后没想到他说了great之后，又说，是不是还可以更快一点？这下我是的确有点confused了，但细细想想，能比O(N)好那就只有O(log(N))了呀，而log(N)肯定只能通过某种binary的方法才能实现的，所以思路就是这样，将所有节点组成binary tree，比如从0到N-1的节点：
+0
+1 2
+3 4 5 6
+7 8 9 10.........
+那么这样，每个节点的parent的id就是：(id-1)/2，而每个节点也拥有left和right两个children他们的id是2id + 1, 2id +2.如此一来，只要所有节点都计算自己的value和两个children发来的value之和，那么0节点将以log（N)的速度收到全部节点的value之和，核心代码是：
+sum = value + receive(2id+1) + receive(2id+2);
+send((id-1)/2,sum);
+但是要注意边界条件的控制，比如最后一个层的点只要发送自己value就可以了，而0节点不需要再往上层发任何数据了。. From 1point 3acres bbs
+
+那么接下来的任务就是，从0节点开始把计算出的全部节点value和发送给自己的children，如此所有Node都会被通知到。
+
+
+
+5
+
+ZigZag Traversal Binary Tree，这个也是leetcode原题，用两个Stack解决，
+
+or write  in different way 
+
+6
+
+第二题给一个整数数组，判断数组是否能被拆分成两个子数组，子数组的和相等。
+
+Ksum
+
+class Solution {
+
+public:
+
+    vector<vector<int>> fourSum(vector<int>& num, int target) {
+
+        vector<vector<int>> allSol;
+
+        vector<int> sol;
+
+    
+
+        sort(num.begin(), num.end());   
+
+
+
+        kSum(num, 0, num.size() - 1, target, 4, sol, allSol);
+
+        
+
+        return allSol;
+
+    }
+
+    
+
+    void kSum(vector<int> &num, int start, int end, int target, int k, vector<int> &sol, vector<vector<int>> &allSol) { 
+
+        //find a solution 
+
+        if(k <= 0) return;
+
+        //base case when there is only one in the array
+
+        if(k == 1) {
+
+            for(int i = start; i <= end; i++) {
+
+                 if(num[i] == target) { 
+
+                        sol.push_back(target);
+
+                        allSol.push_back(sol);
+
+                        sol.pop_back();
+
+                        return;
+
+                 }
+
+            }
+
+        }
+
+        if(k == 2) {
+
+             twoSum(num, start, end, target, sol, allSol);
+
+             return;
+
+        }
+
+        
+
+        for(int i = start; i <= end - k + 1; i++) {
+
+            //from high level , this checking order is to ensure the current combination case is considered before
+
+            if(i > start && num[i] == num[i-1]) continue; ///avoid duplicate solutions/iterations
+
+            sol.push_back(num[i]);
+
+            kSum(num, i+1, end, target - num[i], k - 1, sol, allSol);
+
+            //since the combination  has all the different way to do the iteration and combination 
+
+            sol.pop_back();
+
+        }
+
+    }
+
+    
+
+    void twoSum(vector<int> &num, int start, int end, int target, vector<int> &sol, vector<vector<int>>& allSol) {
+
+         while(start < end) {
+
+              int sum = num[start] + num[end];
+
+              if(sum == target) {
+
+                   sol.push_back(num[start]);
+
+                   sol.push_back(num[end]);
+
+                   allSol.push_back(sol);
+
+                   sol.pop_back();
+
+                   sol.pop_back();
+
+                   start++;
+
+                   end--;
+
+                   while(num[start] == num[start-1]) start++; //remove the duplicate
+
+                   while(num[end] == num[end+1]) end--; //remove the duplicate 
+
+              } else if(sum < target) {
+
+                    start++;
+
+              } else {
+
+                   end--;
+
+              }
+
+         }
+
+    }
+
+};
+
+
+
+7 
+
+接着让实现一个BST的iterator，每次返回下一个最小元素
+
+class BSTIterator {
+
+    vector<TreeNode*> BST;
+
+    stack<TreeNode*> sta;
+
+    int idx;
+
+public:
+
+    BSTIterator(TreeNode *root) {
+
+        //inorder traversal and build the tree
+
+        TreeNode* cur = root;
+
+        idx = 0;
+
+        BST.clear();
+
+        while(cur != NULL || !sta.empty()) {
+
+            if(cur != NULL) {
+
+                sta.push(cur);
+
+                cur = cur->left;
+
+            } else {
+
+                cur = sta.top();
+
+                BST.push_back(cur);
+
+                sta.pop();
+
+                cur = cur->right;
+
+            }
+
+        }
+
+    }
+
+
+
+    /** @return whether we have a next smallest number */
+
+    bool hasNext() {
+
+        return (BST.size() > idx) ? true : false;
+
+    }
+
+
+
+    /** @return the next smallest number */
+
+    int next() {
+
+        int val = BST[idx]->val;
+
+        idx++;
+
+        return val;
+
+    }
+
+};
+
+
+8 
+
+hash table collision
+
+class HashEntry {
+private:
+      int key;
+      int value;
+public:
+      HashEntry(int key, int value) {
+            this->key = key;
+            this->value = value;
+      }
+ 
+      int getKey() {
+            return key;
+      }
+ 
+      int getValue() {
+            return value;
+      }
+};
+ 
+const int TABLE_SIZE = 128;
+
+ 
+
+class HashMap {
+
+private:
+
+      HashEntry **table;
+
+public:
+
+      HashMap() {
+
+            table = new HashEntry*[TABLE_SIZE];
+
+            for (int i = 0; i < TABLE_SIZE; i++)
+
+                  table[i] = NULL;
+
+      }
+
+ 
+
+      int get(int key) {
+
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] == NULL)
+
+                  return -1;
+
+            else
+
+                  return table[hash]->getValue();
+
+      }
+
+ 
+
+      void put(int key, int value) {
+
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] != NULL)
+
+                  delete table[hash];
+
+            table[hash] = new HashEntry(key, value);
+
+      }     
+
+ 
+
+      ~HashMap() {
+
+            for (int i = 0; i < TABLE_SIZE; i++)
+
+                  if (table[i] != NULL)
+
+                        delete table[i];
+
+            delete[] table;
+
+      }
+
+};
+
+9 
+
+Find the kth largest number in a set of numbers
+
+k select 
+
+http://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/
+
+Method 4 (QuickSelect) 
+This is an optimization over method 1 if QuickSort is used as a sorting algorithm in first step. In QuickSort, we pick a pivot element, then move the pivot element to its correct position and partition the array around it. The idea is, not to do complete quicksort, but stop at the point where pivot itself is k’th smallest element. Also, not to recur for both left and right sides of pivot, but recur for one of them according to the position of pivot. The worst case time complexity of this method is O(n2), but it works in O(n) on average.
+
+#include<iostream>
+#include<climits>
+using namespace std;
+ 
+int partition(int arr[], int l, int r);
+ 
+// This function returns k'th smallest element in arr[l..r] using
+// QuickSort based method.  ASSUMPTION: ALL ELEMENTS IN ARR[] ARE DISTINCT
+int kthSmallest(int arr[], int l, int r, int k)
+{
+    // If k is smaller than number of elements in array
+    if (k > 0 && k <= r - l + 1)
+    {
+        // Partition the array around last element and get
+        // position of pivot element in sorted array
+        int pos = partition(arr, l, r);
+ 
+        // If position is same as k
+        if (pos-l == k-1)
+            return arr[pos];
+        if (pos-l > k-1)  // If position is more, recur for left subarray
+            return kthSmallest(arr, l, pos-1, k);
+ 
+        // Else recur for right subarray
+        return kthSmallest(arr, pos+1, r, k-pos+l-1);
+    }
+ 
+    // If k is more than number of elements in array
+    return INT_MAX;
+}
+ 
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+ 
+// Standard partition process of QuickSort().  It considers the last
+// element as pivot and moves all smaller element to left of it
+// and greater elements to right
+int partition(int arr[], int l, int r)
+{
+    int x = arr[r], i = l;
+    for (int j = l; j <= r - 1; j++)
+    {
+        if (arr[j] <= x)
+        {
+            swap(&arr[i], &arr[j]);
+            i++;
+        }
+    }
+    swap(&arr[i], &arr[r]);
+    return i;
+}
+ 
+// Driver program to test above methods
+int main()
+{
+    int arr[] = {12, 3, 5, 7, 4, 19, 26};
+    int n = sizeof(arr)/sizeof(arr[0]), k = 3;
+    cout << "K'th smallest element is " << kthSmallest(arr, 0, n-1, k);
+    return 0;
+}
+
+
+
+10.1  
+给个数字打印excel表格纵栏名字， 比如 1 － A， 26 － Z， 52 － AZ 等等。
+
+class Solution {
+public:
+    string convertToTitle(int n) {
+        string str;
+        while(n > 0) {
+            int val = (n - 1) % 26;
+            str += 'A' + val;
+            n = (n - 1)  / 26;
+        }
+        reverse(str.begin(), str.end());
+        return str;
+    }
+};
+
+10.2
+
+第二题是返回字符串里最长无重复字符串长度。
+sliding window
+
+
+
+11
+题目是很简单的Word break变形...用DP做的给他解释半天...早知道用DFS做了= =
+
+class Solution {
+public:
+    bool helper(string s, int s_idx, int e_idx, vector<string>& wordDict, vector<int>& dp) {
+        bool res = false;
+        if(s_idx > e_idx)  return false;
+        if(dp[s_idx] == 0) return false;
+        if(dp[s_idx] == 1) return true;
+        for(int i = 1; i <= e_idx - s_idx + 1; i++) {
+             if(wordDict.find(wordDict.begin(),wordDict.end(), s.substr(s_idx, i)) != wordDict.end()) { 
+                res = helper(s, i + 1, e_idx, wordDict, dp);
+                if(res == true) {
+                    dp[s_idx] = 1;
+                    return;
+                }
+            }
+        }
+        dp[s_idx] = 0;
+        return false;
+    }
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int len = s.length();
+        vector<int> dp(len, -1);
+        helper(s, 0, len - 1, wordDict, dp);
+        return dp[0] == 1 ?  true : false;
+    }
+};
+
+
+12
+DBMS Questions
+1) ACID properties Explain with an example
+In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties of database transactions. In the context of databases, a sequence ofdatabase operations that satisfies the ACID properties and, thus, can be perceived as single logical operation on the data is called a transaction.
+
+2) Mongodb, NoSQL and SQL discussions for long time.
+SQL is a database computer language designed for the retrieval and management of data in relational database. SQL stands for Structured Query Language.
+
+
+13
+Trie how to implement
+
+https://leetcode.com/problems/implement-trie-prefix-tree/#/description
+
+class TrieNode {
+public:
+    // Initialize your data structure here.
+    char ch;
+    bool word_end;
+    TrieNode* children[26];
+    TrieNode(char cur_ch) {
+        ch = cur_ch;
+        word_end = false;
+        for(int i = 0; i < 26; i++)
+            children[i]  = NULL;
+    }
+    TrieNode() {
+        ch = '0';
+        word_end = false;
+        for(int i = 0; i < 26; i++)
+            children[i]  = NULL;
+    }
+};
+
+class Trie {
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    void insert(string word) {
+        TrieNode* cur = root;
+        for(int i = 0; i < word.length(); i++) {
+            int idx = word[i] - 'a';
+            if(cur->children[idx] == NULL) {
+                cur->children[idx] = new TrieNode(word[i]);
+            }
+            cur = cur->children[idx];
+        }
+        cur->word_end = true;
+    }
+
+    // Returns if the word is in the trie.
+    bool search(string word) {
+        int len  = word.length();
+        int idx;
+        TrieNode* cur = root;
+        for(int i = 0; i < len; i++) {
+            idx = word[i] - 'a';
+            if(cur->children[idx] == NULL)
+                return false;
+            cur = cur->children[idx];
+        }
+        return cur->word_end ? true : false;
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    bool startsWith(string prefix) {
+        int len = prefix.length();
+        TrieNode* cur = root;
+        for(int i = 0; i < len; i++) {
+            int idx = prefix[i] - 'a';
+            if(cur->children[idx] == NULL)
+                return false;
+            cur = cur->children[idx];
+        }
+        return true;
+    }
+
+private:
+    TrieNode* root;
+};
+
+14
+implement hash table 
+
+class HashEntry {
+
+private:
+
+      int key;
+
+      int value;
+
+public:
+
+      HashEntry(int key, int value) {
+
+            this->key = key;
+
+            this->value = value;
+
+      }
+
+ 
+
+      int getKey() {
+
+            return key;
+
+      }
+
+ 
+
+      int getValue() {
+
+            return value;
+
+      }
+
+};
+
+ 
+
+const int TABLE_SIZE = 128;
+
+ 
+
+class HashMap {
+
+private:
+
+      HashEntry **table;
+
+public:
+
+      HashMap() {
+
+            table = new HashEntry*[TABLE_SIZE];
+
+            for (int i = 0; i < TABLE_SIZE; i++)
+
+                  table[i] = NULL;
+
+      }
+
+ 
+
+      int get(int key) {
+
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] == NULL)
+
+                  return -1;
+
+            else
+
+                  return table[hash]->getValue();
+
+      }
+
+ 
+
+      void put(int key, int value) {
+
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] != NULL)
+
+                  delete table[hash];
+
+            table[hash] = new HashEntry(key, value);
+
+      }     
+
+ 
+
+      ~HashMap() {
+
+            for (int i = 0; i < TABLE_SIZE; i++)
+
+                  if (table[i] != NULL)
+
+                        delete table[i];
+
+            delete[] table;
+
+      }
+
+};
+
+
+15 
+Write a Program to find the Mirror of a Tree – Proper code required (Try to Give variable name According to the Meaning )
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool helper(TreeNode* left, TreeNode* right) {
+        if(left == NULL && right == NULL) return true;
+        else if(left == NULL || right == NULL) return false;
+        else if(left->val != right->val) return false;
+        else 
+            return helper(left->left, right->right) && helper(left->right, right->left);
+    }
+    bool isSymmetric(TreeNode* root) {
+        bool res = false;
+        if(root == NULL) return true;
+        return helper(root->left,root->right);
+    }
+};
+
+
+16
+Write a Program to find the Largest Binary Search tree in a Binary tree
+
+bottom up solution 
+from the root , check whether the sub tree is a BST,  then figure out from the current level whether we can add some nodes on top of the ones  
+
+17
+What is normalization ? Explain all types .
+
+Normalization involves arranging attributes in tables based on dependencies between attributes, ensuring that the dependencies are properly enforced by database integrity constraints. Normalization is accomplished through applying some formal rules either by a process of synthesis or decomposition. Synthesis creates a normalized database design based on a known set of dependencies. Decomposition takes an existing (insufficiently normalized) database design and improves it based on the known set of dependencies.
+
+
+18 
+convert URL to tiny URL 
+
+http://www.geeksforgeeks.org/how-to-design-a-tiny-url-or-url-shortener/
+
+int main( )  {
+	int n = 12345;
+	string shortUrl = idToShortURL(n);
+	cout << “Generate short url is “ << shorturl << endl;
+	cout << “Id from url  is “ << shortURLtoID(shorturl) << endl;
+	return 0;
+}
+
+19
+mult-threading classes in java  
+
+pthread_create 
+pthread_join 
+pthread_exit 
+pthread_detach, after this can not join
+
+
+20 
+db  questions
+
+http://www.careerride.com/Database-concepts-interview-questions.aspx
+
+21
+Design Schema 
+http://questpond.over-blog.com/article-sql-server-database-design-interview-questions-108685227.html#What_is_normalizationandwhatarethebenefitsofthesame
+
+needs to read a lot of things to be able to do this properly
+
+22
+1. Write program to identify if two subnets collide.  
+//subset collide  123 234  ? 
+2. Write program to convert a BST to heap (such as the largest number is root, the second largest is to the left of root, the third largest to right of root and so on)   
+level order traversal and build the heap ? 
+http://www.geeksforgeeks.org/how-to-check-if-a-given-array-represents-a-binary-heap/
+convert BST to heap :D
+
+23
+Interview Questions
+
+Find LCA in binary tree.  
+//find whether it is on the left or right sub tree 
+
+24  c++ 
+How to do the inheritance
+find the palindromes in a string
+
+25
+Interview Questions
+
+1st round:
+1. How to uniquely identify the repeating strings from the array.
+2. How to search in Skiplist
+2nd round:
+1. BinarySearch
+2. How to write Customized Comparator
+3. Anagrams
+3rd round:
+Lunch with tech manager and find maximum sub array
+4th round:
+1. Binary Search in sorted matrix
+2. Different ways of writing Singleton pattern
+3. Resume go through
+5th round:
+1. How HashMap works
+2. Get sum using minimum combination of numbers provided
+6th round:
+1. Singleton
+2. Tree traversal
+3. How to mirror the tree
+4. Stack implementation
+5. Queue using stack  6. Reverse the sentence  
+
+26 
+
+
+Interview Questions
+
+Given a sentence, Hello how are you HELLO. Find the minimum distance between two words. Given input: hello, you. Output: 1. The input words are case insensitive.  1 Answer
+Was given a parent div and 3 child divs inside. Asked to add CSS to each giving some height and width to the child divs and border of a certain thickness to all. Asked to add another child div inside the second child. Was asked to give absolute position to this div with some bottom and left positioning and asked to draw the layout.  1 Answer
+Was given a function q(func) which accepts another function as input. Each time this function is called, it will execute the pass in function after 3 seconds. So, if it is called 3 times,
+q(func);
+q(func);
+q(func);
+the func passed inside will only get called after 3 seconds and the second one will get called only after the first one completes and so on.  
+
+27 
+Interview Questions
+
+- Number of ways to walk the matrix from (0,0) to (m,n). (with and without obstacles)
+- Given a binary tree, link nodes at the same level  1 Answer
+- Design a service. Things to consider given service constraints, SLA and so on.
+- Some behavior questions.  Answer Question
+Current project and past projects on resume. Asked for in-depth implementation.  Answer Question
+
+28   c++ conceptual question 
+
+29
+Interview Questions
+
+1. Find the least common ancestor (LCA) in a binary tree. Pointer from node to parent is NOT present. Design the tree node and write the method that returns the LCA
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/#/description
+
+2. Given a circularly rotated array [3 5 6 7 8 -3 -1 -1 1 2] design an algorithm to find an element in an efficient way.  // this is bST 
+
+
+
+31
+Interview Questions
+
+Implement a linkedList  
+
+32
+Interview Questions
+Delete a node in a BST  
+
+33
+Interview Questions
+
+Basic sorting algorithm  
+
+
+34
+Interview Questions
+
+Algorithmic questions like max contiguous sum,permutations of string, connected graph.  
+35
+Write a SQL queries using Group by and having.
+
+
+36 
+Interview Questions
+
+1) What is the data structure of a search engine
+2) 2 Sum 
+
+37 
+Interview Questions
+
+Multithreading was core of all interview questions by most of interviewer.  
+
+38 
+Interview Questions
+
+I was asked to determine if two rectangles overlap. Question was actually easy but I wasn't in right frame of mind and couldn't solve it in given time. Discuss Java collections.  
+
+39
+
+Interview Questions
+
+Longest Common Subsequence, DFS and print paths from the root node to all the nodes in the tree etc.  
+
+40
+
+rotate an integer array in length of k 
+
+41
+Interview Questions
+
+How to implement ranking function in SQL  
+42
+
+Given two binary trees check if one is subtree of other.
+Verify if given series is a Fibonacci series or not.
+Reverse a doubly linked list.
+Given a BST with integer values and a key, find the closest node to the key. eg. for BST 1 4 7 15 and key 8 node 7 is to be returned.
+Some design based questions.  
+
+43 
+Write a program in Java to assess a given string whether it complies with following patterns. Return true if a given string complies with these patterns else false.
+
+N = N1 + N2
+N&gt;= N1 &gt;= N2
+where N is the Nth element in the string or element at Nth position;
+N1 is the (N-1) element in the string & N2 is the (N-2) element in the string.
+
+Example 1: 224610
+Elements in this string are… 
+
+
+44
+
+Interview Questions
+
+the first interview was about basic question on OOP concepts like ( polymorphism , inheritance and encapsulation) and one programming ques - anagrams.
+the questions in the second intr was from my resume and 2 programming questions - Given a string print the oldest repeating character and newest none repeating character - Given a string of open and close brackets return whether the number of open and close brackets match or…
+
+45 
+Interview Questions
+
+Design a cache system  
+
+46
+On Site: Given a huge file, find duplicate strings and return how many times it appeared. Given a table of employee and salary, find the highest salary in each department.  Answer Question
+On site:Given an array of numbers, find the pair of two numbers whose sum is less than six. Design a RDBMS for a stock market. 5.  Answer Question
+Given an array of size 100 with sequential numbers, there is only one number is duplicate. Find that number.
+Return the 2nd highest salary from salary table  
+47 
+Interview Questions
+
+find a string in a large doc  
+48 
+
+Phone Interview 1:
+(1)Find maximum height of BST. This is easy using recursion. Then he asked me to do it iteratively, which I somehow managed to solve.
+(2)The Dutch flag problem. This was not tough. But the next question was tough. It was about finding particular keys in a dictionary. They have a custom function that tells you if a key is in the dictionary and you to find out if for given input, you get required output. For example --
+
+The dictionary is like:
+
+{hi,hello,sir,how, are, you}
+
+And you have a function isWord(x) that tells you if a particular word is in that dictinary.
+
+So if the input is hisirhowareyou
+the output must be hi sir how are you
+
+
+49 
+Interview Questions
+
+1. Fibonacci numbers
+1 1 2 3 5 8 13 ...
+
+2. two sum, do not need to deal with duplicate pairs  
+
+50
+Interview Questions
+
+longest substring palindrome  
+
+51
+
+Interview Questions
+
+given a chess board that is 3 x 3 squares, and only one piece, the knight, write a program that will move the knight from any starting location to any other (given) location in the board and return an error if it can not.  
+
+52
+Interview Questions
+
+1. Implement a function that would accept two strings and check if one string is an anagram of the other.
+2. Given an array(list) of integers, write a function that would determine if the elements in the array can be divided into two parts each giving the same sum.
+3. Email address drop-down application. For example, when we type email address while composing an email, we get a drop down of suggested… 
+
+53
+
+Given int **p how do you find the value of what it is pointing to? What is p in this case?  Answer Question
+what is the difference between C and C++? How do you declare an array of 5 characters?  Answer Question
+What is a Hash Table and what are its complexities? What is a balanced tree?  Answer Question
+What do you to to an insertion sort to get a runtime of O(1)? When inserting an element to a sorted linked list, what would its runtime be?  Answer Question
+What is polymorphism? Give an example. What is the difference between private inheritance and protected inheritance?  
+
+54
+
+The technical questions covered a wide range of areas which I appreciated. The areas included object oriented design, architecture design, problem-solving/algorithms, objective-c (blocks, view controllers, etc.), and mobile specific questions. The most difficult question I was asked was to design a document upload/fetcher system for mobile (kinda like dropbox for the iphone). The difficulty was really in all the details of the problem (caching, database modeling, security, sessions, etc). Algorithm questions ranged from binary tree search questions to array pattern searching. The most unexpected question was the interviewer gave me a stream of digits and asked me to find the pattern. I got really stumped on this problem, it was my last interview of the day and I just blanked out. I guess I did well enough throughout the day because I got the job. By no means an easy interview, but not extremely hard, I was extremely well prepared as I had been interviewing for a while. Id say its on the average to difficult scale, if you are bad at architecting systems then this interview would have been HIGH diff.  
+
+55 
+
+Interview Questions
+
+How would we make Singleton thread protected except interviewer did not want to include Synchronized block in there.  
+
+56 
+Interview Questions
+
+Fibonacci Series using recursion and iteration. Ask to reduce number of recursive calls.
+
+57 
+Interview Questions
+
+In linux, how to search a string in a Gigabytes file and print that string in the terminal.  
+58
+
+Interview Questions
+
+what data structure to use in case of a load balancer  
+
+59 
+
+https://www.careercup.com/question?id=5763811128639488
