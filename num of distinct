@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int s_len = s.length();
+        int t_len = t.length();
+        vector<vector<int>> count_dp(s_len + 1, vector<int>(t_len + 1, 0));
+        for(int i = 0;  i <= s_len; i++) {
+            count_dp[i][0] = 1;
+        }
+        for(int i = 1; i <= s_len; i++)  {
+            for(int j = 1; j <= t_len; j++) {
+                count_dp[i][j] = count_dp[i-1][j];
+                if(s[i-1] == t[j-1]) {
+                    count_dp[i][j] += count_dp[i-1][j-1];
+                }
+            }
+        }
+        
+        return count_dp[s_len][t_len];
+    }
+};
