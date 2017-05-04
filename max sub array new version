@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int helper(vector<int>& nums, int start, int end) {
+        if(start > end) return INT_MIN;
+        if(start == end) return nums[start];
+        int mid = start + (end - start) / 2;
+        int left_max = helper(nums, start , mid - 1);
+        int right_max = helper(nums, mid + 1, end);
+        int left_tmp = 0;
+        int left_tmp_max = 0;
+        int right_tmp = 0;
+        int right_tmp_max = 0;
+        for(int i = mid - 1; i >= 0; i--) {
+            left_tmp += nums[i];
+            left_tmp_max = max(left_tmp_max, left_tmp);
+        }
+        for(int i = mid + 1; i <= end; i++) {
+            right_tmp += nums[i];
+            right_tmp_max = max(right_tmp_max, right_tmp);
+        }
+        return  max(max(left_max, right_max), nums[mid] + left_tmp_max + right_tmp_max);
+         
+    }
+    int maxSubArray(vector<int>& nums) {
+        int res = INT_MIN;
+        int size = nums.size();
+        if(size == 0) return 0;
+        res = helper(nums, 0, size - 1);
+        return res;
+    }
+};
