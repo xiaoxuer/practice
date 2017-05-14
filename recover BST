@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+///very good, how to change value of the tree node instead the left & right child pointers
+    void inorder(TreeNode* cur, unordered_map<int, TreeNode*> &hash_map, vector<int> &list) {
+        if(cur == NULL)
+            return;
+        inorder(cur->left, hash_map, list);
+        hash_map[cur->val] = cur;
+        list.push_back(cur->val);
+        inorder(cur->right, hash_map, list);
+    }
+    
+    void recoverTree(TreeNode* root) {
+        ///serialization & record the node that is against the rules ? 
+        unordered_map<int, TreeNode*> hash_map;
+        vector<int> list;
+        inorder(root, hash_map, list);
+        int first_idx = -1, second_idx = -1;
+        for(int i = 1; i < list.size(); i++) {
+            if(first_idx == -1 && list[i] < list[i-1]) //this is to keep the previous index
+                first_idx = i - 1;
+            //keep updating
+            if(list[i] < list[i-1]) // this is to keep the next index
+                second_idx = i; 
+        }
+        hash_map[list[first_idx]]->val = list[second_idx];
+        hash_map[list[second_idx]]->val = list[first_idx];
+    }
