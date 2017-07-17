@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int len = s.length();
+        vector<bool> dp(len + 1, true);
+        int i, j;
+        for(i = 1; i <= len; i++) {
+            for(j = i - 1; j >= 0; j--) {
+                if(dp[j] == false) continue;
+                else {
+                    string tmp = s.substr(j, i-j);
+                    if(std::find(wordDict.begin(), wordDict.end(), tmp) != wordDict.end())
+                        break;
+                }
+            }
+            if(j < 0)
+                dp[i] = false;
+        }
+        return dp[len];
+    }
+};
