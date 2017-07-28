@@ -1,0 +1,126 @@
+1
+class Solution {
+2
+public:
+3
+    void solve(vector<vector<char>>& board) {
+4
+        int row = board.size();
+5
+        if(row == 0) return;
+6
+        int col = board[0].size();
+7
+        if(col == 0) return;
+8
+        queue<pair<int, int>> bfs;
+9
+        for(int i = 0; i < row; i++) {
+10
+            if(board[i][0] == 'O') {
+11
+                bfs.push(make_pair(i, 0));
+12
+                board[i][0] = 'Y';
+13
+            }
+14
+            if(col >= 2 && board[i][col - 1] == 'O') {
+15
+                bfs.push(make_pair(i, col - 1));
+16
+                board[i][col - 1] = 'Y';
+17
+            }
+18
+        }
+19
+        for(int i = 0; i < col; i++) {
+20
+            if(board[0][i] == 'O') {
+21
+                bfs.push(make_pair(0, i));
+22
+                board[0][i] = 'Y';
+23
+            }
+24
+            if(row >= 2 && board[row - 1][i] == 'O') {
+25
+                bfs.push(make_pair(row - 1, i));
+26
+                board[row - 1][i] = 'Y';
+27
+            }
+28
+        }
+29
+        while(!bfs.empty()) {
+30
+            pair<int, int> top = bfs.front();
+31
+            bfs.pop();
+32
+            if(top.first > 0 && board[top.first - 1][top.second] == 'O') {
+33
+                bfs.push(make_pair(top.first - 1, top.second));
+34
+                board[top.first - 1][top.second] = 'Y';
+35
+            }
+36
+            if(top.first < row - 1 && board[top.first + 1][top.second] == 'O') {
+37
+                bfs.push(make_pair(top.first + 1, top.second));
+38
+                board[top.first + 1][top.second] = 'Y';
+39
+            }
+40
+            if(top.second > 0 && board[top.first][top.second - 1] == 'O') {
+41
+                board[top.first][top.second - 1] = 'Y';
+42
+                bfs.push(make_pair(top.first , top.second - 1));
+43
+            }
+44
+            if(top.second < col  - 1 && board[top.first][top.second + 1] == 'O') {
+45
+                board[top.first][top.second + 1] = 'Y';
+46
+                bfs.push(make_pair(top.first, top.second + 1));
+47
+            }
+48
+        }
+49
+        
+50
+        for(int i = 1; i < row; i++) {
+51
+            for(int j = 1; j < col; j++) {
+52
+                if(board[i][j] == 'O')
+53
+                    board[i][j] = 'X';
+54
+            }
+55
+        }
+56
+        for(int i = 0; i < row; i++) {
+57
+            for(int j = 0; j < col; j++) {
+58
+                if(board[i][j] == 'Y')
+59
+                    board[i][j] = 'O';
+60
+            }
+61
+        }
+62
+    }
+63
+};
