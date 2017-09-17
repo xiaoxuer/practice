@@ -1,0 +1,38 @@
+/* this is a very good example of divide and conqure solution */
+
+class Solution {
+public:
+    
+    //this question
+    int helper(vector<long>& dp, int start, int end, int lower, int upper) {
+        //end is set to one after the last element in the array
+        if(end - start <= 1) return 0;
+        int mid = (start + end) / 2;
+        int count = helper(dp, start, mid, lower, upper) + helper(dp, mid, end, lower + upper);
+        int j = mid, k = mid, t = mid, r = 0;
+        //cache at the same time , very very smart 
+        vector<long> cache(end - start, 0);
+        for(int i = start; i < mid; ++i, ++r) {
+            while(k < end && sums[k] - sums[i] < lower) k++;
+            while(j < end && sums[j] - sums[i] <= upper) j++;
+            while(t < end && sums[t] < sums[i]) cache[r++] = sum[t++]; //start merging
+            //r is the write idx , i is the current been processed left idex , i
+            //t is the current been processed right idx 
+            cache[r] = sums[i];
+            count += j - k;
+        }
+        for(int i = 0; i < end - start; i++) {
+            sums[i + start] = cache[i];
+        }
+        return count;
+    }
+    //deal with left & right half seperately 
+    //then the pairs, one in left half and one in right half
+    int countRangeSum(vector<int>& nums, int lower, int upper) {
+        int n = nums.size();
+        vector<long> dp(n + 1, 0);
+        for(int i = 0; i < n; i++)
+            dp[i + 1] = dp[i] + nums[i];
+        return helper(dp, 0, n + 1, lower, upper);
+    }
+};
